@@ -1,0 +1,25 @@
+plugins {
+    id 'java'
+}
+
+group = 'neo'
+version = '1.0-SNAPSHOT'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(11)
+    }
+}
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.testng:testng:6.14.3'
+    implementation 'org.seleniumhq.selenium:selenium-java:4.15.0'
+    implementation 'io.github.bonigarcia:webdrivermanager:5.6.0'
+}
+
+test {
+    useTestNG()
+}
