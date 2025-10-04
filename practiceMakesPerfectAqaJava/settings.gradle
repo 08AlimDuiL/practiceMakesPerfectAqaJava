@@ -1,3 +1,4 @@
 rootProject.name = 'practiceMakesPerfectAqaJavaIdea'
 include 'sandbox'
+include 'addressbook-web-tests'
 
