@@ -9,6 +9,7 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$/practiceMakesPerfectAqaJava" />
+            <option value="$PROJECT_DIR$/practiceMakesPerfectAqaJava/addressbook-web-tests" />
             <option value="$PROJECT_DIR$/practiceMakesPerfectAqaJava/sandbox" />
           </set>
         </option>
