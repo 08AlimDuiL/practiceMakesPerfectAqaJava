@@ -10,7 +10,6 @@ public class GroupData {
     }
 
     public String getHeader() {
-
         return header;
     }
 
@@ -23,5 +22,4 @@ public class GroupData {
         this.header = header;
         this.footer = footer;
     }
-
 }
