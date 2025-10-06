@@ -1,23 +1,25 @@
-package ru.stqa.ptf.addressbook;
+package ru.stqa.ptf.addressbook.tests;
 
 import org.testng.annotations.*;
+import ru.stqa.ptf.addressbook.model.ContactsData;
+import ru.stqa.ptf.addressbook.model.GroupData;
 
 public class GroupCreationTest extends TestBase {
 
     @Test
     public void testGroupCreation() throws Exception {
-        goToGroupPage();
-        initGroupCreation();
-        fillGroupForm(new GroupData("test1", "test2", "test3"));
-        submitGroupCreation();
-        returnToGroupPage();
-        logout();
+        app.getNavigationHelper().goToGroupPage();
+        app.getGroupHelper().initGroupCreation();
+        app.getGroupHelper().fillGroupForm(new GroupData("test1", "test2", "test3"));
+        app.getGroupHelper().submitGroupCreation();
+        app.getGroupHelper().returnToGroupPage();
+        app.logout();
     }
 
     @Test(dependsOnMethods = "testGroupCreation")
     public void testCreationContact() throws Exception {
-        goToAddNewContact();
-        fillFormContact(new ContactsData(
+        app.goToAddNewContact();
+        app.getContactHelper().fillFormContact(new ContactsData(
                 "Vasilii",
                 "Ivanovich",
                 "Ivanov",
@@ -34,7 +36,8 @@ public class GroupCreationTest extends TestBase {
                 "2000",
                 "test1")
         );
-        goToHomePage();
-        logout();
+        app.goToHomePage();
+        app.logout();
+
     }
 }
