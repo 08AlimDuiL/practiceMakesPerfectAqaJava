@@ -39,7 +39,6 @@ public class ApplicationManager {
     }
 
     public void logout() {
-
         wd.findElement(By.linkText("Logout")).click();
     }
 
@@ -53,6 +52,7 @@ public class ApplicationManager {
     }
 
     public NavigationHelper getNavigationHelper() {
+
         return navigationHelper;
     }
 

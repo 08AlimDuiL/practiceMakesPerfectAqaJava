@@ -33,11 +33,10 @@ public class GroupCreationTest extends TestBase {
                 "1112233@mail.ru",
                 "2",
                 "January",
-                "2000",
+                "3000",
                 "test1")
         );
         app.goToHomePage();
         app.logout();
-
     }
 }
