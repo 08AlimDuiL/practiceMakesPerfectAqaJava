@@ -53,62 +53,77 @@ public class ContactsData {
     }
 
     public String getName() {
+
         return name;
     }
 
     public String getMiddleName() {
+
         return middleName;
     }
 
     public String getLastName() {
+
         return lastName;
     }
 
     public String getNickName() {
+
         return nickName;
     }
 
     public String getCompany() {
+
         return company;
     }
 
     public String getAddress() {
+
         return address;
     }
 
     public String getHomePhoneNumber() {
+
         return home;
     }
 
     public String getMobilePhoneNumber() {
+
         return mobile;
     }
 
     public String getWork() {
+
         return work;
     }
 
     public String getFax() {
+
         return fax;
     }
 
     public String getEmail() {
+
         return email;
     }
 
     public String getBirthDay() {
+
         return birthDay;
     }
 
     public String getBirthMonth() {
+
         return birthMonth;
     }
 
     public String getBirthYear() {
+
         return birthYear;
     }
 
     public String getGroup() {
+
         return group;
     }
 }
