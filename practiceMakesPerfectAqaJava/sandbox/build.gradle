@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'com.adarshr.test-logger' version '3.2.0'
 }
 
 group = 'neo'
@@ -15,4 +16,18 @@ dependencies {
 
 test {
     useTestNG()
+}
+
+testlogger {
+    theme 'plain'
+    showExceptions true
+    showStackTraces true
+    showCauses true
+    slowThreshold 1
+    showSummary true
+    showSimpleNames false
+    showPassed true
+    showSkipped true
+    showFailed true
+    showStandardStreams false
 }
