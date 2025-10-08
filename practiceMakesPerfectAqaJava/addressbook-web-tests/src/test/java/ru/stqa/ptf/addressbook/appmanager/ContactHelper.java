@@ -11,8 +11,8 @@ public class ContactHelper extends HelperBase {
         super(wd);
     }
 
-    public void goToHomePage() {
-        click(By.linkText("home"));
+    public void initContactCreation() {
+        wd.findElement(By.linkText("add new")).click();
     }
 
     public void selectContact() {
@@ -29,7 +29,8 @@ public class ContactHelper extends HelperBase {
     }
 
     public void enterContact() {
-        click(By.xpath("//div[@id='content']/form/input[21]"));
+        // click(By.xpath("//div[@id='content']/form/input[21]"));
+        click(By.xpath("//form/input[@value=\"Enter\"][last()]"));
     }
 
     public void updateContact() {
@@ -56,27 +57,15 @@ public class ContactHelper extends HelperBase {
         } else {
             Assert.assertFalse(isElementPresent(By.name("new_group")));
         }
-      /*  if (isElementPresent(By.name("new_group"))) {
-            clickDropdownAndType(By.name("new_group"), contactsData.getGroup());
-        }
-       */
     }
-/*
-    public void fillEditContact(ContactsData contactsData) {
-        type(By.name("firstname"), contactsData.getName());
-        type(By.name("middlename"), contactsData.getMiddleName());
-        type(By.name("lastname"), contactsData.getLastName());
-        type(By.name("nickname"), contactsData.getNickName());
-        type(By.name("company"), contactsData.getCompany());
-        type(By.name("address"), contactsData.getAddress());
-        type(By.name("home"), contactsData.getHomePhoneNumber());
-        type(By.name("mobile"), contactsData.getMobilePhoneNumber());
-        type(By.name("fax"), contactsData.getFax());
-        type(By.name("email"), contactsData.getEmail());
-        clickDropdownAndType(By.name("bday"), contactsData.getBirthDay());
-        clickDropdownAndType(By.name("bmonth"), contactsData.getBirthMonth());
-        type(By.name("byear"), contactsData.getBirthYear());
-    }
- */
 
+    public boolean isThereAGroup() {
+        return isElementPresent(By.name("selected[]"));
+    }
+
+    public void createContact(ContactsData contactsData, boolean creation) {
+        initContactCreation();
+        fillFormContact(contactsData, creation);
+        enterContact();
+    }
 }

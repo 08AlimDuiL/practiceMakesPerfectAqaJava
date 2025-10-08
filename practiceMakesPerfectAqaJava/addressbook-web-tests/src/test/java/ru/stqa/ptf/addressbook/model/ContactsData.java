@@ -126,6 +126,4 @@ public class ContactsData {
 
         return group;
     }
-
-
 }
