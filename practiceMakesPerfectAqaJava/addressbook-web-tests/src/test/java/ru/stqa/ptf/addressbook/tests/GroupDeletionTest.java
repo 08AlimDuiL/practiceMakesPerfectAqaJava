@@ -11,11 +11,4 @@ public class GroupDeletionTest extends TestBase {
         app.getGroupHelper().deleteSelectedGroup();
         app.getGroupHelper().returnToGroupPage();
     }
-
-    @Test
-    public void testContactDeletion() throws Exception {
-        app.getContactHelper().goToHomePage();
-        app.getContactHelper().selectContact();
-        app.getContactHelper().deleteContact();
-    }
 }
