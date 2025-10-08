@@ -8,7 +8,27 @@ public class ContactModificationTest extends TestBase {
 
     @Test
     public void testContactModification() {
-        app.getContactHelper().goToHomePage();
+        app.getNavigationHelper().goToHomeHeader();
+        if (!app.getContactHelper().isThereAGroup()) {
+            app.getContactHelper().createContact(new ContactsData(
+                            "Vasilii",
+                            "Ivanovich",
+                            "Ivanov",
+                            "Vasya",
+                            "Neo",
+                            "address",
+                            "1112233",
+                            "+79113334455",
+                            "work",
+                            "no",
+                            "1112233@mail.ru",
+                            "2",
+                            "January",
+                            "6666",
+                            "test1"),
+                    true);
+            app.getNavigationHelper().goToHomeHeader();
+        }
         app.getContactHelper().selectContact();
         app.getContactHelper().editContact();
         app.getContactHelper().fillFormContact(new ContactsData(
@@ -25,7 +45,7 @@ public class ContactModificationTest extends TestBase {
                         "1112233@mail.ru",
                         "2",
                         "January",
-                        "4444",
+                        "6554",
                         null),
                 false
         );
