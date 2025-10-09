@@ -2,8 +2,12 @@ package ru.stqa.ptf.addressbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import ru.stqa.ptf.addressbook.model.ContactsData;
+
+import java.time.Duration;
 
 public class ContactHelper extends HelperBase {
 
@@ -22,6 +26,11 @@ public class ContactHelper extends HelperBase {
     public void deleteContact() {
         click(By.xpath("//input[@value='Delete']"));
         wd.switchTo().alert().accept();
+
+        WebDriverWait wait = new WebDriverWait(wd, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.textToBePresentInElementLocated(
+                By.xpath("//div[@id='content']/div"), "Record successful deleted"
+        ));
     }
 
     public void editContact() {
@@ -60,6 +69,7 @@ public class ContactHelper extends HelperBase {
     }
 
     public boolean isThereAGroup() {
+
         return isElementPresent(By.name("selected[]"));
     }
 
@@ -67,5 +77,10 @@ public class ContactHelper extends HelperBase {
         initContactCreation();
         fillFormContact(contactsData, creation);
         enterContact();
+    }
+
+    public int getContactCount() {
+
+        return wd.findElements(By.xpath("//td[@class=\"center\"]/input[@name=\"selected[]\"]")).size();
     }
 }

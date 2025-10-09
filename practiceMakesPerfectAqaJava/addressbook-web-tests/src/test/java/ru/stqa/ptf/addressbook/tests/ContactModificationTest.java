@@ -1,5 +1,6 @@
 package ru.stqa.ptf.addressbook.tests;
 
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.stqa.ptf.addressbook.model.ContactsData;
 
@@ -9,6 +10,10 @@ public class ContactModificationTest extends TestBase {
     @Test
     public void testContactModification() {
         app.getNavigationHelper().goToHomeHeader();
+
+        int before = app.getContactHelper().getContactCount();
+        System.out.println("Groups before: " + before);
+
         if (!app.getContactHelper().isThereAGroup()) {
             app.getContactHelper().createContact(new ContactsData(
                             "Vasilii",
@@ -50,5 +55,11 @@ public class ContactModificationTest extends TestBase {
                 false
         );
         app.getContactHelper().updateContact();
+        app.getNavigationHelper().goToHomeHeader();
+
+        int after = app.getGroupHelper().getGroupCount();
+        System.out.println("Groups after: " + after);
+
+        Assert.assertEquals(after, before);
     }
 }
