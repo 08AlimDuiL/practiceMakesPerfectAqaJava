@@ -1,5 +1,6 @@
 package ru.stqa.ptf.addressbook.tests;
 
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.stqa.ptf.addressbook.model.ContactsData;
 
@@ -28,8 +29,17 @@ public class ContactDeletionTest extends TestBase {
                     true);
             app.getNavigationHelper().goToHomeHeader();
         }
-        //  Thread.sleep(5000);
+        //Thread.sleep(3000);
+        int before = app.getContactHelper().getContactCount();
+        System.out.println("Groups before: " + before);
+
         app.getContactHelper().selectContact();
         app.getContactHelper().deleteContact();
+        app.getNavigationHelper().goToHomeHeader();
+
+        int after = app.getContactHelper().getContactCount();
+        System.out.println("Groups after: " + after);
+
+        Assert.assertEquals(after, before - 1);
     }
 }
