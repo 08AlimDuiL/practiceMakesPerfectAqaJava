@@ -6,14 +6,17 @@ public class GroupData {
     private final String footer;
 
     public String getName() {
+
         return name;
     }
 
     public String getHeader() {
+
         return header;
     }
 
     public String getFooter() {
+
         return footer;
     }
 
