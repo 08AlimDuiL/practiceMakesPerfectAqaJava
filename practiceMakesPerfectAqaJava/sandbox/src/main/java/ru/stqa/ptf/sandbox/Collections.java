@@ -1,8 +1,6 @@
 package ru.stqa.ptf.sandbox;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.ArrayList;
+import java.util.*;
 
 public class Collections {
 
@@ -24,10 +22,14 @@ public class Collections {
             System.out.println("Я очень хочу выучить " + l);
         }
         List<String> strings = new ArrayList<>(Arrays.asList("aa", "bb"));
-      //  List<String> strings = new ArrayList<>(List.of("aa", "bb")); mutable для Java 9++
+        //  List<String> strings = new ArrayList<>(List.of("aa", "bb")); mutable для Java 9++
         //   List<String> strings = List.of("aa", "bb")); immutable
 
+        Iterator<String> iter = strings.iterator(); // контракт для итерации
+        // Set<Integer> intSet = Set.of(1, 2, 3, 4, 5);
+        Set<Integer> intSet = new HashSet<>();
 
+        Map<String, Integer> map= new HashMap<>();
 
     }
 }
