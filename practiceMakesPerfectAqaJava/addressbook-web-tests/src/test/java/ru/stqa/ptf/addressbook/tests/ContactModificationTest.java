@@ -3,7 +3,6 @@ package ru.stqa.ptf.addressbook.tests;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.stqa.ptf.addressbook.model.ContactsData;
-import ru.stqa.ptf.addressbook.model.GroupData;
 
 import java.util.Comparator;
 import java.util.HashSet;
