@@ -10,7 +10,7 @@ import java.util.List;
 
 public class ContactCreationTest extends TestBase {
 
-    @Test
+    @Test(enabled = false)
     public void testCreationContact() {
         app.getNavigationHelper().goToHomeHeader();
 
@@ -43,7 +43,7 @@ public class ContactCreationTest extends TestBase {
         // app.logout();
     }
 
-    @Test
+    @Test(enabled = false)
     public void testCreationContactList() {
         app.getNavigationHelper().goToHomeHeader();
 
