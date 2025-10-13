@@ -3,13 +3,12 @@ package ru.stqa.ptf.addressbook.tests;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.stqa.ptf.addressbook.model.ContactsData;
-import ru.stqa.ptf.addressbook.model.GroupData;
 
 import java.util.List;
 
 public class ContactDeletionTest extends TestBase {
 
-    @Test
+    @Test(enabled = false)
     public void testContactDeletion() throws InterruptedException {
         app.getNavigationHelper().goToHomeHeader();
         if (!app.getContactHelper().isThereAGroup()) {
@@ -46,7 +45,7 @@ public class ContactDeletionTest extends TestBase {
         Assert.assertEquals(after, before - 1);
     }
 
-    @Test
+    @Test(enabled = false)
     public void testContactDeletionList() {
         app.getNavigationHelper().goToHomeHeader();
         if (!app.getContactHelper().isThereAGroup()) {

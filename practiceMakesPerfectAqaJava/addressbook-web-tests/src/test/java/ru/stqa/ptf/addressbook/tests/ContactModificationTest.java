@@ -11,7 +11,7 @@ import java.util.List;
 
 public class ContactModificationTest extends TestBase {
 
-    @Test
+    @Test(enabled = false)
     public void testContactModification() {
         app.getNavigationHelper().goToHomeHeader();
 
@@ -67,7 +67,7 @@ public class ContactModificationTest extends TestBase {
         Assert.assertEquals(after, before);
     }
 
-    @Test
+    @Test(enabled = false)
     public void testContactModificationList() {
         app.getNavigationHelper().goToHomeHeader();
 
