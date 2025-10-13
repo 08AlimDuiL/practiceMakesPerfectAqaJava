@@ -20,9 +20,10 @@ public class HelperBase {
     }
 
     protected void clickDropdownAndType(By locator, String text) {
-        click(locator);
-        new Select(wd.findElement(locator)).selectByVisibleText(text);
-
+        if (text != null && !text.trim().isEmpty()) {
+            click(locator);
+            new Select(wd.findElement(locator)).selectByVisibleText(text);
+        }
     }
 
     protected void type(By locator, String text) {

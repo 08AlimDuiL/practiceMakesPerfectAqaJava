@@ -1,6 +1,9 @@
 package ru.stqa.ptf.addressbook.model;
 
+import java.util.Objects;
+
 public class ContactsData {
+    private int id;
     private final String name;
     private final String middleName;
     private final String lastName;
@@ -34,7 +37,7 @@ public class ContactsData {
 
             String birthYear,
             String group) {
-
+        this.id = Integer.MAX_VALUE;
         this.name = name;
         this.middleName = middleName;
         this.lastName = lastName;
@@ -50,6 +53,44 @@ public class ContactsData {
         this.birthMonth = birthMonth;
         this.birthYear = birthYear;
         this.group = group;
+    }
+
+    public ContactsData(String name, String lastName) {
+        this.name = name;
+        this.lastName = lastName;
+        this.id = Integer.MAX_VALUE;
+        this.middleName = "";
+        this.nickName = "";
+        this.company = "";
+        this.address = "";
+        this.home = "";
+        this.mobile = "";
+        this.work = "";
+        this.fax = "";
+        this.email = "";
+        this.birthDay = "";
+        this.birthMonth = "";
+        this.birthYear = "";
+        this.group = "";
+    }
+
+    public ContactsData(int id, String firstName, String lastName) {
+        this.id = id;
+        this.name = firstName;
+        this.lastName = lastName;
+        this.middleName = "";
+        this.nickName = "";
+        this.company = "";
+        this.address = "";
+        this.home = "";
+        this.mobile = "";
+        this.work = "";
+        this.fax = "";
+        this.email = "";
+        this.birthDay = "";
+        this.birthMonth = "";
+        this.birthYear = "";
+        this.group = "";
     }
 
     public String getName() {
@@ -125,5 +166,37 @@ public class ContactsData {
     public String getGroup() {
 
         return group;
+    }
+
+    public int getId() {
+
+        return id;
+    }
+
+    public void setId(int id) {
+
+        this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "ContactsData{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", lastName='" + lastName + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ContactsData that = (ContactsData) o;
+        return Objects.equals(name, that.name) && Objects.equals(lastName, that.lastName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, lastName);
     }
 }
