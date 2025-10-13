@@ -31,7 +31,7 @@ public class ApplicationManager {
         } else if (browser.equals("chrome")) {
             wd = new ChromeDriver();
         }
-       // wd.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+        // wd.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
         wait = new WebDriverWait(wd, Duration.ofSeconds(10));
         wd.get("http://127.0.0.1/addressbook/");
         navigationHelper = new NavigationHelper(wd);
@@ -53,12 +53,12 @@ public class ApplicationManager {
         wd.quit();
     }
 
-    public GroupHelper getGroupHelper() {
+    public GroupHelper group() {
 
         return groupHelper;
     }
 
-    public NavigationHelper getNavigationHelper() {
+    public NavigationHelper goTo() {
 
         return navigationHelper;
     }

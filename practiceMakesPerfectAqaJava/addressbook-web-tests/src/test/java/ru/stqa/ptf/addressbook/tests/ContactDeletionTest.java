@@ -10,7 +10,7 @@ public class ContactDeletionTest extends TestBase {
 
     @Test(enabled = false)
     public void testContactDeletion() throws InterruptedException {
-        app.getNavigationHelper().goToHomeHeader();
+        app.goTo().goToHomeHeader();
         if (!app.getContactHelper().isThereAGroup()) {
             app.getContactHelper().createContact(new ContactsData(
                             "Vasilii",
@@ -29,7 +29,7 @@ public class ContactDeletionTest extends TestBase {
                             "2222",
                             "test1"),
                     true);
-            app.getNavigationHelper().goToHomeHeader();
+            app.goTo().goToHomeHeader();
         }
         //Thread.sleep(3000);
         int before = app.getContactHelper().getContactCount();
@@ -37,7 +37,7 @@ public class ContactDeletionTest extends TestBase {
 
         app.getContactHelper().selectContact();
         app.getContactHelper().deleteContact();
-        app.getNavigationHelper().goToHomeHeader();
+        app.goTo().goToHomeHeader();
 
         int after = app.getContactHelper().getContactCount();
         System.out.println("Groups after: " + after);
@@ -47,20 +47,20 @@ public class ContactDeletionTest extends TestBase {
 
     @Test(enabled = false)
     public void testContactDeletionList() {
-        app.getNavigationHelper().goToHomeHeader();
+        app.goTo().goToHomeHeader();
         if (!app.getContactHelper().isThereAGroup()) {
             app.getContactHelper().createContact(new ContactsData(
                             "Vasilii",
                             "Petrov"),
                     true);
-            app.getNavigationHelper().goToHomeHeader();
+            app.goTo().goToHomeHeader();
         }
 
         List<ContactsData> before = app.getContactHelper().getContactList();
 
         app.getContactHelper().selectContact();
         app.getContactHelper().deleteContact();
-        app.getNavigationHelper().goToHomeHeader();
+        app.goTo().goToHomeHeader();
 
         List<ContactsData> after = app.getContactHelper().getContactList();
 

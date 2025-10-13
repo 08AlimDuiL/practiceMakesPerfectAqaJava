@@ -11,23 +11,22 @@ public class GroupDeletionTest extends TestBase {
 
     @BeforeMethod
     public void ensurePreconditions() {
-        app.getNavigationHelper().goToGroupPageHeader();
-        if (!app.getGroupHelper().isThereAGroup()) {
-            app.getGroupHelper().createGroup(new GroupData("testNew", null, null));
+        app.goTo().groupPageHeader();
+        if (app.group().list().size() == 0) {
+            app.group().create(new GroupData("testNew", null, null));
         }
     }
 
     @Test
     public void testGroupDeletionFirst() {
-        int before = app.getGroupHelper().getGroupCount();
+        int before = app.group().getGroupCount();
         System.out.println("Groups before: " + before);
 
-        app.getGroupHelper().selectGroup();
-        app.getGroupHelper().deleteSelectedGroup();
+        app.group().selectGroup();
+        app.group().deleteSelectedGroup();
+        app.group().returnToGroupPage();
 
-        app.getGroupHelper().returnToGroupPage();
-
-        int after = app.getGroupHelper().getGroupCount();
+        int after = app.group().getGroupCount();
         System.out.println("Groups after: " + after);
 
         Assert.assertEquals(after, before - 1);
@@ -35,32 +34,29 @@ public class GroupDeletionTest extends TestBase {
 
     @Test
     public void testGroupDeletionList() {
-        List<GroupData> before = app.getGroupHelper().getGroupList();
+        List<GroupData> before = app.group().list();
 
-        app.getGroupHelper().selectGroup();
-        app.getGroupHelper().deleteSelectedGroup();
+        app.group().selectGroup();
+        app.group().deleteSelectedGroup();
+        app.group().returnToGroupPage();
 
-        app.getGroupHelper().returnToGroupPage();
-
-        List<GroupData> after = app.getGroupHelper().getGroupList();
+        List<GroupData> after = app.group().list();
 
         Assert.assertEquals(after.size(), before.size() - 1);
     }
 
     @Test
     public void testGroupDeletion1() {
-        List<GroupData> before = app.getGroupHelper().getGroupList();
+        List<GroupData> before = app.group().list();
 
-        app.getGroupHelper().selectGroupByIndex(before.size() - 1);
-        app.getGroupHelper().deleteSelectedGroup();
+        int index = before.size() - 1;
+        app.group().delete(index);
 
-        app.getGroupHelper().returnToGroupPage();
-
-        List<GroupData> after = app.getGroupHelper().getGroupList();
+        List<GroupData> after = app.group().list();
 
         Assert.assertEquals(after.size(), before.size() - 1);
 
-        before.remove(before.size() - 1);
+        before.remove(index);
 //        for (int i = 0; i < after.size(); i++) {
 //
 //            Assert.assertEquals(before.get(i), after.get(i));
