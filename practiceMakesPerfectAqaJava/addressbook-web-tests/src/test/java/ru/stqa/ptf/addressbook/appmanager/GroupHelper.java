@@ -38,8 +38,13 @@ public class GroupHelper extends HelperBase {
     }
 
     public void selectGroup() {
+        wd.findElement(By.name("selected[]")).click();
+        //click(By.name("selected[]"));
+    }
 
-        click(By.name("selected[]"));
+    public void selectGroupByIndex(int index) {
+
+        wd.findElements(By.name("selected[]")).get(index).click();
     }
 
     public void deleteSelectedGroup() {
@@ -77,7 +82,8 @@ public class GroupHelper extends HelperBase {
         List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));
         for (WebElement element : elements) {
             String name = element.getText();
-            GroupData group = new GroupData(name, null, null);
+            int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
+            GroupData group = new GroupData(id, name, null, null);
             groups.add(group);
         }
 
