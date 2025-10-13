@@ -12,7 +12,7 @@ public class ContactCreationTest extends TestBase {
 
     @Test(enabled = false)
     public void testCreationContact() {
-        app.getNavigationHelper().goToHomeHeader();
+        app.goTo().goToHomeHeader();
 
         int before = app.getContactHelper().getContactCount();
         System.out.println("Groups before: " + before);
@@ -45,7 +45,7 @@ public class ContactCreationTest extends TestBase {
 
     @Test(enabled = false)
     public void testCreationContactList() {
-        app.getNavigationHelper().goToHomeHeader();
+        app.goTo().goToHomeHeader();
 
         List<ContactsData> before = app.getContactHelper().getContactList();
 

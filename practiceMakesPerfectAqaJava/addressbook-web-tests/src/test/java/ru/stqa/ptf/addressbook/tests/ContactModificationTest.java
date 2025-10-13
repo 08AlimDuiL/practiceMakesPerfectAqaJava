@@ -13,7 +13,7 @@ public class ContactModificationTest extends TestBase {
 
     @Test(enabled = false)
     public void testContactModification() {
-        app.getNavigationHelper().goToHomeHeader();
+        app.goTo().goToHomeHeader();
 
         int before = app.getContactHelper().getContactCount();
         System.out.println("Groups before: " + before);
@@ -36,7 +36,7 @@ public class ContactModificationTest extends TestBase {
                             "6666",
                             "test1"),
                     true);
-            app.getNavigationHelper().goToHomeHeader();
+            app.goTo().goToHomeHeader();
         }
         app.getContactHelper().selectContact();
         app.getContactHelper().editContact();
@@ -59,9 +59,9 @@ public class ContactModificationTest extends TestBase {
                 false
         );
         app.getContactHelper().updateContact();
-        app.getNavigationHelper().goToHomeHeader();
+        app.goTo().goToHomeHeader();
 
-        int after = app.getGroupHelper().getGroupCount();
+        int after = app.group().getGroupCount();
         System.out.println("Groups after: " + after);
 
         Assert.assertEquals(after, before);
@@ -69,12 +69,12 @@ public class ContactModificationTest extends TestBase {
 
     @Test(enabled = false)
     public void testContactModificationList() {
-        app.getNavigationHelper().goToHomeHeader();
+        app.goTo().goToHomeHeader();
 
 
         if (!app.getContactHelper().isThereAGroup()) {
             app.getContactHelper().createContact(new ContactsData("Petr", "Petrov"), true);
-            app.getNavigationHelper().goToHomeHeader();
+            app.goTo().goToHomeHeader();
         }
 
         List<ContactsData> before = app.getContactHelper().getContactList();
@@ -87,7 +87,7 @@ public class ContactModificationTest extends TestBase {
         app.getContactHelper().fillFormContact(contact, false);
         app.getContactHelper().updateContact();
         // Thread.sleep(3000);
-        app.getNavigationHelper().goToHomeHeader();
+        app.goTo().goToHomeHeader();
 
         List<ContactsData> after = app.getContactHelper().getContactList();
 
