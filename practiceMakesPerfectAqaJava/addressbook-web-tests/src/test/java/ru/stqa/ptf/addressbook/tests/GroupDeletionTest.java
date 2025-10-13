@@ -13,7 +13,7 @@ public class GroupDeletionTest extends TestBase {
     public void ensurePreconditions() {
         app.goTo().groupPageHeader();
         if (app.group().list().size() == 0) {
-            app.group().create(new GroupData("testNew", null, null));
+            app.group().create(new GroupData().withName("test9"));
         }
     }
 
@@ -21,11 +21,9 @@ public class GroupDeletionTest extends TestBase {
     public void testGroupDeletionFirst() {
         int before = app.group().getGroupCount();
         System.out.println("Groups before: " + before);
-
         app.group().selectGroup();
         app.group().deleteSelectedGroup();
         app.group().returnToGroupPage();
-
         int after = app.group().getGroupCount();
         System.out.println("Groups after: " + after);
 
@@ -35,11 +33,9 @@ public class GroupDeletionTest extends TestBase {
     @Test
     public void testGroupDeletionList() {
         List<GroupData> before = app.group().list();
-
         app.group().selectGroup();
         app.group().deleteSelectedGroup();
         app.group().returnToGroupPage();
-
         List<GroupData> after = app.group().list();
 
         Assert.assertEquals(after.size(), before.size() - 1);
@@ -48,10 +44,8 @@ public class GroupDeletionTest extends TestBase {
     @Test
     public void testGroupDeletion1() {
         List<GroupData> before = app.group().list();
-
         int index = before.size() - 1;
         app.group().delete(index);
-
         List<GroupData> after = app.group().list();
 
         Assert.assertEquals(after.size(), before.size() - 1);
@@ -61,6 +55,7 @@ public class GroupDeletionTest extends TestBase {
 //
 //            Assert.assertEquals(before.get(i), after.get(i));
 //        }
+
         Assert.assertEquals(before, after);
     }
 }

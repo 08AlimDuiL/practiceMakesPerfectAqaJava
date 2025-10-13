@@ -15,7 +15,7 @@ public class GroupCreationTest extends TestBase {
         app.goTo().groupPageHeader();
         int before = app.group().getGroupCount();
         System.out.println("Groups before === " + before);
-        app.group().create(new GroupData("test3", null, null));
+        app.group().create(new GroupData().withName("test9"));
         int after = app.group().getGroupCount();
         System.out.println("Groups after === " + after);
 
@@ -26,7 +26,7 @@ public class GroupCreationTest extends TestBase {
     public void testGroupCreation() {
         app.goTo().groupPageHeader();
         List<GroupData> before = app.group().list();
-        app.group().create(new GroupData("test3", null, null));
+        app.group().create(new GroupData().withName("test9"));
         List<GroupData> after = app.group().list();
 
         Assert.assertEquals(after.size(), before.size() + 1);
@@ -36,7 +36,7 @@ public class GroupCreationTest extends TestBase {
     public void testGroupCreationList() {
         app.goTo().groupPageHeader();
         List<GroupData> before = app.group().list();
-        GroupData group = new GroupData("test2", null, null);
+        GroupData group = new GroupData().withName("test9");
         app.group().create(group);
         List<GroupData> after = app.group().list();
 
@@ -55,12 +55,11 @@ public class GroupCreationTest extends TestBase {
                 return Integer.compare(o1.getId(), o2.getId());
             }
         };
-
+*/
         Comparator<? super GroupData> byId = (Comparator<GroupData>) (o1, o2) -> Integer.compare(o1.getId(), o2.getId());
         int max1 = after.stream().max(byId).get().getId();
-   */
-        int max1 = after.stream().max((o1, o2) -> Integer.compare(o1.getId(), o2.getId())).get().getId();
-        group.setId(max1);
+        //int max1 = after.stream().max((o1, o2) -> Integer.compare(o1.getId(), o2.getId())).get().getId();
+        group.withId(max1);
         before.add(group);
 
         Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
@@ -70,7 +69,7 @@ public class GroupCreationTest extends TestBase {
     public void testGroupCreationListOrder() {
         app.goTo().groupPageHeader();
         List<GroupData> before = app.group().list();
-        GroupData group = new GroupData("test2", null, null);
+        GroupData group = new GroupData().withName("test9");
         app.group().create(group);
         List<GroupData> after = app.group().list();
 

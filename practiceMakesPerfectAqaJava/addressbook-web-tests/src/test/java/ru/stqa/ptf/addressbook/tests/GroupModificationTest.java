@@ -16,7 +16,7 @@ public class GroupModificationTest extends TestBase {
         app.goTo().groupPageHeader();
         //    if (!app.group().isThereAGroup()) {
         if (app.group().list().size() == 0) {
-            app.group().create(new GroupData("testNew", null, null));
+            app.group().create(new GroupData().withName("test9"));
         }
     }
 
@@ -24,13 +24,11 @@ public class GroupModificationTest extends TestBase {
     public void testGroupModificationFirst() {
         int before = app.group().getGroupCount();
         System.out.println("Groups before === " + before);
-
         app.group().selectGroup();
         app.group().initGroupModification();
-        app.group().fillGroupForm(new GroupData("test5", "test5", "test5"));
+        app.group().fillGroupForm(new GroupData().withName("test1").withHeader("test5").withFooter("test5"));
         app.group().submitGroupModification();
         app.group().returnToGroupPage();
-
         int after = app.group().getGroupCount();
         System.out.println("Groups after === " + after);
 
@@ -40,13 +38,11 @@ public class GroupModificationTest extends TestBase {
     @Test
     public void testGroupModification() {
         List<GroupData> before = app.group().list();
-
         app.group().selectGroup();
         app.group().initGroupModification();
-        app.group().fillGroupForm(new GroupData("test5", "test5", "test5"));
+        app.group().fillGroupForm(new GroupData().withName("test1").withHeader("test5").withFooter("test5"));
         app.group().submitGroupModification();
         app.group().returnToGroupPage();
-
         List<GroupData> after = app.group().list();
 
         Assert.assertEquals(after.size(), before.size());
@@ -56,22 +52,23 @@ public class GroupModificationTest extends TestBase {
     public void testGroupModificationList() {
         List<GroupData> before = app.group().list();
         int index = before.size() - 1;
-
         app.group().selectGroupByIndex(index);
         app.group().initGroupModification();
-
-        GroupData groupData = new GroupData(before.get(index).getId(), "test1", "test5", "test5");
-
+        GroupData groupData = new GroupData()
+                .withId(before.get(index).getId())
+                .withName("test1")
+                .withHeader("test5")
+                .withFooter("test5");
         app.group().fillGroupForm(groupData);
         app.group().submitGroupModification();
         app.group().returnToGroupPage();
-
         List<GroupData> after = app.group().list();
 
         Assert.assertEquals(after.size(), before.size());
 
         before.remove(index);
         before.add(groupData);
+
         Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
     }
 
@@ -79,10 +76,12 @@ public class GroupModificationTest extends TestBase {
     public void testGroupModificationListOrder() {
         List<GroupData> before = app.group().list();
         int index = before.size() - 1;
-        GroupData groupData = new GroupData(before.get(index).getId(), "test1", "test5", "test5");
-
+        GroupData groupData = new GroupData()
+                .withId(before.get(index).getId())
+                .withName("test1")
+                .withHeader("test5")
+                .withFooter("test5");
         app.group().modify(index, groupData);
-
         List<GroupData> after = app.group().list();
 
         Assert.assertEquals(after.size(), before.size());
