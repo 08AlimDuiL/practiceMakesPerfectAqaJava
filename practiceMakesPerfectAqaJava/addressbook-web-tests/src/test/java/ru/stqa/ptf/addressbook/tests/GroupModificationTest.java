@@ -8,6 +8,7 @@ import ru.stqa.ptf.addressbook.model.GroupData;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class GroupModificationTest extends TestBase {
 
@@ -15,7 +16,7 @@ public class GroupModificationTest extends TestBase {
     public void ensurePreconditions() {
         app.goTo().groupPageHeader();
         //    if (!app.group().isThereAGroup()) {
-        if (app.group().list().size() == 0) {
+        if (app.group().all().size() == 0) {
             app.group().create(new GroupData().withName("test9"));
         }
     }
@@ -91,6 +92,26 @@ public class GroupModificationTest extends TestBase {
         Comparator<? super GroupData> byId = (g1, g2) -> Integer.compare(g1.getId(), g2.getId());
         before.sort(byId);
         after.sort(byId);
+        Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
+    }
+
+    @Test
+    public void testGroupModificationSet() {
+        Set<GroupData> before = app.group().all();
+        GroupData modifiedGroup = before.iterator().next();
+        GroupData groupData = new GroupData()
+                .withId(modifiedGroup.getId())
+                .withName("test1")
+                .withHeader("test5")
+                .withFooter("test5");
+        app.group().modify(groupData);
+        Set<GroupData> after = app.group().all();
+
+        Assert.assertEquals(after.size(), before.size());
+
+        before.remove(modifiedGroup);
+        before.add(groupData);
+
         Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
     }
 }

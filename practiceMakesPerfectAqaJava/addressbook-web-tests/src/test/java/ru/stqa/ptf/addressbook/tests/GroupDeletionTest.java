@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 import ru.stqa.ptf.addressbook.model.GroupData;
 
 import java.util.List;
+import java.util.Set;
 
 public class GroupDeletionTest extends TestBase {
 
@@ -42,7 +43,7 @@ public class GroupDeletionTest extends TestBase {
     }
 
     @Test
-    public void testGroupDeletion1() {
+    public void testGroupDeletionOrder() {
         List<GroupData> before = app.group().list();
         int index = before.size() - 1;
         app.group().delete(index);
@@ -55,6 +56,20 @@ public class GroupDeletionTest extends TestBase {
 //
 //            Assert.assertEquals(before.get(i), after.get(i));
 //        }
+
+        Assert.assertEquals(before, after);
+    }
+
+    @Test
+    public void testGroupDeletionSet() {
+        Set<GroupData> before = app.group().all();
+        GroupData deletedGroup = before.iterator().next();
+        app.group().delete(deletedGroup);
+        Set<GroupData> after = app.group().all();
+
+        Assert.assertEquals(after.size(), before.size() - 1);
+
+        before.remove(deletedGroup);
 
         Assert.assertEquals(before, after);
     }
