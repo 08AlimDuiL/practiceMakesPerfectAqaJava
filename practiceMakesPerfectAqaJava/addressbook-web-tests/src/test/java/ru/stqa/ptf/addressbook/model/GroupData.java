@@ -75,25 +75,23 @@ public class GroupData {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         GroupData groupData = (GroupData) o;
-        return Objects.equals(name, groupData.name);
+        return id == groupData.id && Objects.equals(name, groupData.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(name);
+        return Objects.hash(id, name);
     }
 
-//    @Override
-//    public boolean equals(Object o) {
-//        if (this == o) return true;
-//        if (o == null || getClass() != o.getClass()) return false;
-//        GroupData groupData = (GroupData) o;
-//        return id == groupData.id && Objects.equals(name, groupData.name);
-//        //return  name != null ? name.equals(groupData.name) : groupData.name == null; старый способ
-//    }
-//
-//    @Override
-//    public int hashCode() {
-//        return Objects.hash(id, name);
-//    }
+    public boolean equalsByName(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        GroupData groupData = (GroupData) o;
+        return Objects.equals(name, groupData.name);
+        //return  name != null ? name.equals(groupData.name) : groupData.name == null; старый способ
+    }
+
+    public int hashCodeByName() {
+        return Objects.hashCode(name);
+    }
 }

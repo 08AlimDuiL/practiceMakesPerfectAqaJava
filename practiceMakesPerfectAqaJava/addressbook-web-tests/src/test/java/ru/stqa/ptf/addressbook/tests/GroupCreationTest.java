@@ -7,6 +7,7 @@ import ru.stqa.ptf.addressbook.model.GroupData;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class GroupCreationTest extends TestBase {
 
@@ -66,6 +67,7 @@ public class GroupCreationTest extends TestBase {
     }
 
     @Test
+    @Ignore
     public void testGroupCreationListOrder() {
         app.goTo().groupPageHeader();
         List<GroupData> before = app.group().list();
@@ -79,6 +81,23 @@ public class GroupCreationTest extends TestBase {
         Comparator<? super GroupData> byId = (g1, g2) -> Integer.compare(g1.getId(), g2.getId());
         before.sort(byId);
         after.sort(byId);
+
+        Assert.assertEquals((before), (after));
+        //  return Objects.equals(name, groupData.name);!!
+    }
+
+    @Test
+    public void testGroupCreationSet() {
+        app.goTo().groupPageHeader();
+        Set<GroupData> before = app.group().all();
+        GroupData group = new GroupData().withName("test10");
+        app.group().create(group);
+        Set<GroupData> after = app.group().all();
+
+        Assert.assertEquals(after.size(), before.size() + 1);
+
+        group.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt());
+        before.add(group);
 
         Assert.assertEquals((before), (after));
     }
