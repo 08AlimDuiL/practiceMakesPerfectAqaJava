@@ -120,4 +120,18 @@ public class GroupCreationTest extends TestBase {
                 before.withAdded(group.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
         MatcherAssert.assertThat(after.size(), CoreMatchers.equalTo(before.size() + 1));
     }
+
+    @Test
+    public void testBadGroupCreationSetHamcrest() {
+        app.goTo().groupPageHeader();
+        Groups before = app.group().all();
+        GroupData group = new GroupData().withName("test'");
+        app.group().create(group);
+
+        assertThat(app.group().count(), equalTo(before.size()));
+
+        Groups after = app.group().all();
+
+        assertThat(after, equalTo(before));
+    }
 }
