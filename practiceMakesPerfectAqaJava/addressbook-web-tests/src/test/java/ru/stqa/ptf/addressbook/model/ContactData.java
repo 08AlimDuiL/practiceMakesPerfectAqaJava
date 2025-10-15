@@ -20,6 +20,17 @@ public class ContactData {
     private String birthYear;
     private String group;
 
+    public ContactData withAllPhones(String allPhones) {
+        this.allPhones = allPhones;
+        return this;
+    }
+
+    private String allPhones;
+
+    public String getAllPhones() {
+        return allPhones;
+    }
+
     public ContactData withId(int id) {
         this.id = id;
         return this;
@@ -99,7 +110,9 @@ public class ContactData {
         this.group = group;
         return this;
     }
-    public ContactData() {}
+
+    public ContactData() {
+    }
 
     public ContactData(
             String name,
@@ -273,6 +286,7 @@ public class ContactData {
 
     @Override
     public int hashCode() {
+
         return Objects.hash(id, name, lastName);
     }
 //    @Override
