@@ -163,4 +163,32 @@ public class ContactHelper extends HelperBase {
 
         return new Contacts(contactsCache);
     }
+
+    public ContactData infoFromEditForm(ContactData contact) {
+        initContactModificationById(contact.getId());
+        String firstName = wd.findElement(By.name("firstname")).getAttribute("value");
+        String lastName = wd.findElement(By.name("lastname")).getAttribute("value");
+        String homePhoneNumber = wd.findElement(By.name("home")).getAttribute("value");
+        String mobilePhoneNumber = wd.findElement(By.name("mobile")).getAttribute("value");
+        String workPhoneNumber = wd.findElement(By.name("work")).getAttribute("value");
+        wd.navigate().back();
+        return new ContactData()
+                .withId(contact.getId())
+                .withFirstName(firstName)
+                .withLastName(lastName)
+                .withHomePhoneNumber(homePhoneNumber)
+                .withMobilePhoneNumber(mobilePhoneNumber)
+                .withWorkPhoneNumber(workPhoneNumber);
+    }
+
+    private void initContactModificationById(int id) {
+        WebElement checkbox = wd.findElement(By.cssSelector(String.format("input[value='%s']", id))); // метод последовательных приближений, узнали про String.format
+        WebElement row = checkbox.findElement(By.xpath("./../.."));
+        List<WebElement> cells = row.findElements(By.tagName("td"));
+        cells.get(7).findElement(By.tagName("a")).click();
+
+        // wd.findElement(By.xpath(String.format("//input[@value='%s']/../../td[8]/a", id))).click();
+        // wd.findElement(By.xpath(String.format("//tr[./input[@value='%s']]/td[8]/a", id))).click();
+        // wd.findElement(By.cssSelector(String.format("a[href='edit.php?id=%s']", id))).click();
+    }
 }
