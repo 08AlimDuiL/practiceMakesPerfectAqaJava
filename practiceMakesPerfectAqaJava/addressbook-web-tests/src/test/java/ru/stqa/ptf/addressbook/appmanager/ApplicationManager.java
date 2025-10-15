@@ -46,10 +46,12 @@ public class ApplicationManager {
     }
 
     public void logout() {
+
         wd.findElement(By.linkText("Logout")).click();
     }
 
     public void stop() {
+
         wd.quit();
     }
 
@@ -63,7 +65,7 @@ public class ApplicationManager {
         return navigationHelper;
     }
 
-    public ContactHelper getContactHelper() {
+    public ContactHelper contact() {
 
         return contactHelper;
     }

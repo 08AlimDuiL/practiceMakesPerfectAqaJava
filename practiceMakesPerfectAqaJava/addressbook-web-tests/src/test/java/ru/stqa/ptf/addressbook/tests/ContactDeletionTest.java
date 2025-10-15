@@ -1,18 +1,28 @@
 package ru.stqa.ptf.addressbook.tests;
 
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import ru.stqa.ptf.addressbook.model.ContactsData;
+import ru.stqa.ptf.addressbook.model.ContactData;
+import ru.stqa.ptf.addressbook.model.Contacts;
 
 import java.util.List;
 
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
+
 public class ContactDeletionTest extends TestBase {
+
+    @BeforeMethod
+    public void ensurePreconditions() {
+
+        app.goTo().goToHomeHeader();
+    }
 
     @Test(enabled = false)
     public void testContactDeletion() throws InterruptedException {
-        app.goTo().goToHomeHeader();
-        if (!app.getContactHelper().isThereAGroup()) {
-            app.getContactHelper().createContact(new ContactsData(
+        if (!app.contact().isThereAGroup()) {
+            app.contact().create(new ContactData(
                             "Vasilii",
                             "Ivanovich",
                             "Ivanov",
@@ -21,7 +31,7 @@ public class ContactDeletionTest extends TestBase {
                             "address",
                             "1112233",
                             "+79113334455",
-                            "work",
+                            "2223344",
                             "no",
                             "1112233@mail.ru",
                             "2",
@@ -32,38 +42,48 @@ public class ContactDeletionTest extends TestBase {
             app.goTo().goToHomeHeader();
         }
         //Thread.sleep(3000);
-        int before = app.getContactHelper().getContactCount();
+        int before = app.contact().count();
         System.out.println("Groups before: " + before);
-
-        app.getContactHelper().selectContact();
-        app.getContactHelper().deleteContact();
+        app.contact().selectContact();
+        app.contact().deleteContact();
         app.goTo().goToHomeHeader();
-
-        int after = app.getContactHelper().getContactCount();
+        int after = app.contact().count();
         System.out.println("Groups after: " + after);
 
         Assert.assertEquals(after, before - 1);
     }
 
-    @Test(enabled = false)
+    @Test
     public void testContactDeletionList() {
-        app.goTo().goToHomeHeader();
-        if (!app.getContactHelper().isThereAGroup()) {
-            app.getContactHelper().createContact(new ContactsData(
+        if (!app.contact().isThereAGroup()) {
+            app.contact().create(new ContactData(
                             "Vasilii",
                             "Petrov"),
                     true);
             app.goTo().goToHomeHeader();
         }
-
-        List<ContactsData> before = app.getContactHelper().getContactList();
-
-        app.getContactHelper().selectContact();
-        app.getContactHelper().deleteContact();
+        List<ContactData> before = app.contact().list();
+        app.contact().selectContact();
+        app.contact().deleteContact();
         app.goTo().goToHomeHeader();
-
-        List<ContactsData> after = app.getContactHelper().getContactList();
+        List<ContactData> after = app.contact().list();
 
         Assert.assertEquals(after.size(), before.size() - 1);
+    }
+
+    @Test
+    public void testContactDeletionHamcrest() {
+        if (app.contact().list().size() == 0) {
+            app.contact().create(new ContactData().withFirstName("Nikolai").withLastName("Petrov"), true);
+            app.goTo().goToHomeHeader();
+        }
+        Contacts before = app.contact().getAll();
+        ContactData deletedContact = before.iterator().next();
+        app.contact().delete(deletedContact);
+        app.goTo().goToHomeHeader();
+        assertThat(app.contact().count(), equalTo(before.size() - 1));
+        Contacts after = app.contact().getAll();
+
+        assertThat(after, equalTo(before.withOut(deletedContact)));
     }
 }

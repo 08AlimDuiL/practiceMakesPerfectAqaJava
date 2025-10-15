@@ -133,7 +133,25 @@ public class GroupModificationTest extends TestBase {
         Groups after = app.group().all();
 
         assertEquals(after.size(), before.size());
-        assertThat(after, equalTo(before.withoutAdded(modifiedGroup).withAdded(groupData)));
+        assertThat(after, equalTo(before.withOut(modifiedGroup).withAdded(groupData)));
+    }
+
+    @Test
+    public void testHashGroupModificationSetHamcrest() {
+        Groups before = app.group().all();
+        GroupData modifiedGroup = before.iterator().next();
+        GroupData groupData = new GroupData()
+                .withId(modifiedGroup.getId())
+                .withName("test1")
+                .withHeader("test5")
+                .withFooter("test5");
+        app.group().modify(groupData);
+
+        assertThat(app.group().count(), equalTo(before.size()));
+
+        Groups after = app.group().all();
+
+        assertThat(after, equalTo(before.withOut(modifiedGroup).withAdded(groupData)));
     }
 
     @Test
