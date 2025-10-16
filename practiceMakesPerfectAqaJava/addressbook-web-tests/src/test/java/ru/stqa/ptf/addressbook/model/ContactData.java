@@ -15,20 +15,23 @@ public class ContactData {
     private String workPhoneNumber;
     private String fax;
     private String email;
+    private String email2;
+    private String email3;
     private String birthDay;
     private String birthMonth;
     private String birthYear;
     private String group;
+    private String allPhones;
+    private String allEmails;
 
     public ContactData withAllPhones(String allPhones) {
         this.allPhones = allPhones;
         return this;
     }
 
-    private String allPhones;
-
-    public String getAllPhones() {
-        return allPhones;
+    public ContactData withAllEmails(String allEmails) {
+        this.allEmails = allEmails;
+        return this;
     }
 
     public ContactData withId(int id) {
@@ -91,6 +94,16 @@ public class ContactData {
         return this;
     }
 
+    public ContactData withEmail2(String email2) {
+        this.email2 = email2;
+        return this;
+    }
+
+    public ContactData withEmail3(String email3) {
+        this.email3 = email3;
+        return this;
+    }
+
     public ContactData withBirthDay(String birthDay) {
         this.birthDay = birthDay;
         return this;
@@ -109,6 +122,106 @@ public class ContactData {
     public ContactData withGroup(String group) {
         this.group = group;
         return this;
+    }
+
+    public String getName() {
+
+        return name;
+    }
+
+    public String getMiddleName() {
+
+        return middleName;
+    }
+
+    public String getLastName() {
+
+        return lastName;
+    }
+
+    public String getNickName() {
+
+        return nickName;
+    }
+
+    public String getCompany() {
+
+        return company;
+    }
+
+    public String getAddress() {
+
+        return address;
+    }
+
+    public String getHomePhoneNumber() {
+
+        return homePhoneNumber;
+    }
+
+    public String getMobilePhoneNumber() {
+
+        return mobilePhoneNumber;
+    }
+
+    public String getWorkPhoneNumber() {
+
+        return workPhoneNumber;
+    }
+
+    public String getFax() {
+
+        return fax;
+    }
+
+    public String getEmail() {
+
+        return email;
+    }
+
+    public String getEmail2() {
+
+        return email2;
+    }
+
+    public String getEmail3() {
+
+        return email3;
+    }
+
+    public String getBirthDay() {
+
+        return birthDay;
+    }
+
+    public String getBirthMonth() {
+
+        return birthMonth;
+    }
+
+    public String getBirthYear() {
+
+        return birthYear;
+    }
+
+    public String getGroup() {
+
+        return group;
+    }
+
+    public int getId() {
+
+        return id;
+    }
+
+    public String getAllPhones() {
+
+        return allPhones;
+    }
+
+    public String getAllEmails() {
+
+        return allEmails;
     }
 
     public ContactData() {
@@ -185,86 +298,6 @@ public class ContactData {
         this.birthMonth = "";
         this.birthYear = "";
         this.group = "";
-    }
-
-    public String getName() {
-
-        return name;
-    }
-
-    public String getMiddleName() {
-
-        return middleName;
-    }
-
-    public String getLastName() {
-
-        return lastName;
-    }
-
-    public String getNickName() {
-
-        return nickName;
-    }
-
-    public String getCompany() {
-
-        return company;
-    }
-
-    public String getAddress() {
-
-        return address;
-    }
-
-    public String getHomePhoneNumber() {
-
-        return homePhoneNumber;
-    }
-
-    public String getMobilePhoneNumber() {
-
-        return mobilePhoneNumber;
-    }
-
-    public String getWorkPhoneNumber() {
-
-        return workPhoneNumber;
-    }
-
-    public String getFax() {
-
-        return fax;
-    }
-
-    public String getEmail() {
-
-        return email;
-    }
-
-    public String getBirthDay() {
-
-        return birthDay;
-    }
-
-    public String getBirthMonth() {
-
-        return birthMonth;
-    }
-
-    public String getBirthYear() {
-
-        return birthYear;
-    }
-
-    public String getGroup() {
-
-        return group;
-    }
-
-    public int getId() {
-
-        return id;
     }
 
     @Override

@@ -1,6 +1,5 @@
 package ru.stqa.ptf.addressbook.tests;
 
-import org.checkerframework.checker.units.qual.C;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.ptf.addressbook.model.ContactData;
@@ -53,9 +52,7 @@ public class ContactPhoneTest extends TestBase {
                     true);
             app.goTo().goToHomeHeader();
         }
-
         ContactData contact = app.contact().almostAll().iterator().next();
-
         ContactData contactInfoFromEditForm = app.contact().infoFromEditForm(contact);
 
         assertThat(contact.getAllPhones(), equalTo(mergePhones(contactInfoFromEditForm)));
@@ -70,7 +67,7 @@ public class ContactPhoneTest extends TestBase {
     }
 
     public static String cleaned(String phone) {
+
         return phone.replaceAll("\\s", "").replaceAll("[-()]", "");
     }
-
 }

@@ -11,6 +11,7 @@ java {
         languageVersion = JavaLanguageVersion.of(11)
     }
 }
+
 repositories {
     mavenCentral()
 }
@@ -24,7 +25,6 @@ dependencies {
 
 test {
     useTestNG()
-
     afterTest { desc, result ->
         println "┌─ Тест: ${desc.className}.${desc.name}"
         println "├─ Статус: ${result.resultType}"
@@ -36,11 +36,11 @@ test {
             println "\n" + "╔══════════════════════════════════════════════════════╗"
             println "║             РЕЗУЛЬТАТЫ ТЕСТОВ                        ║"
             println "╠══════════════════════════════════════════════════════╣"
-            println "║ Всего тестов: ${result.testCount}".padRight(35) + "                    ║"
-            println "║ Успешно: ${result.successfulTestCount}".padRight(35) + "                    ║"
-            println "║ Провалено: ${result.failedTestCount}".padRight(35) + "                    ║"
-            println "║ Пропущено: ${result.skippedTestCount}".padRight(35) + "                    ║"
-            println "║ Время: ${result.endTime - result.startTime}ms".padRight(35) + "                    ║"
+            println "║ Всего тестов: ${result.testCount}".padRight(55) + "║"
+            println "║ Успешно: ${result.successfulTestCount}".padRight(55) + "║"
+            println "║ Провалено: ${result.failedTestCount}".padRight(55) + "║"
+            println "║ Пропущено: ${result.skippedTestCount}".padRight(55) + "║"
+            println "║ Время: ${result.endTime - result.startTime}ms".padRight(55) + "║"
             println "╚══════════════════════════════════════════════════════╝"
         }
     }
