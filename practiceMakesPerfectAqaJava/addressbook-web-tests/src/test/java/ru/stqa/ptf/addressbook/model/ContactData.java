@@ -34,6 +34,17 @@ public class ContactData {
         return this;
     }
 
+    public ContactData withAllPhones(String allPhones) {
+        this.allPhones = allPhones;
+        return this;
+    }
+
+    private String allPhones;
+
+    public String getAllPhones() {
+        return allPhones;
+    }
+
     public ContactData withId(int id) {
         this.id = id;
         return this;
