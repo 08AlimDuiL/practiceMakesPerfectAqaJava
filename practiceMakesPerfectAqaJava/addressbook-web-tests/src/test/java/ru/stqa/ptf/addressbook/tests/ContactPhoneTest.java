@@ -53,9 +53,7 @@ public class ContactPhoneTest extends TestBase {
                     true);
             app.goTo().goToHomeHeader();
         }
-
         ContactData contact = app.contact().almostAll().iterator().next();
-
         ContactData contactInfoFromEditForm = app.contact().infoFromEditForm(contact);
 
         assertThat(contact.getAllPhones(), equalTo(mergePhones(contactInfoFromEditForm)));
@@ -70,7 +68,7 @@ public class ContactPhoneTest extends TestBase {
     }
 
     public static String cleaned(String phone) {
+
         return phone.replaceAll("\\s", "").replaceAll("[-()]", "");
     }
-
 }
