@@ -174,15 +174,27 @@ public class ContactHelper extends HelperBase {
             int id = Integer.parseInt(cells.get(0).findElement(By.tagName("input")).getAttribute("value"));
             String lastname = cells.get(1).getText();
             String firstname = cells.get(2).getText();
-            String allPhones = cells.get(5).getText();
-            String[] phones = allPhones.split("\n");
+            String[] phones = cells.get(5).getText().split("\n");
+            String homePhone = "";
+            String mobilePhone = "";
+            String workPhone = "";
+
+            if (phones.length > 0) {
+                homePhone = phones[0];
+            }
+            if (phones.length > 1) {
+                mobilePhone = phones[1];
+            }
+            if (phones.length > 2) {
+                workPhone = phones[2];
+            }
             contacts.add(new ContactData()
                     .withId(id)
                     .withFirstName(firstname)
                     .withLastName(lastname)
-                    .withHomePhoneNumber(phones[0])
-                    .withMobilePhoneNumber(phones[1])
-                    .withWorkPhoneNumber(phones[2])
+                    .withHomePhoneNumber(homePhone)
+                    .withMobilePhoneNumber(mobilePhone)
+                    .withWorkPhoneNumber(workPhone)
             );
         }
         return contacts;
