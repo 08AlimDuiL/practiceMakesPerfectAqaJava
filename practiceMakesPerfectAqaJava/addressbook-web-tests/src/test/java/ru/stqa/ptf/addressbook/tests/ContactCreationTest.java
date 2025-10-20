@@ -7,7 +7,9 @@ import ru.stqa.ptf.addressbook.model.ContactData;
 import ru.stqa.ptf.addressbook.model.Contacts;
 
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -79,5 +81,29 @@ public class ContactCreationTest extends TestBase {
                 before.withAdded(contact.withId(after.stream().mapToInt((g) ->
                         g.getId()).max().getAsInt()))));
         assertThat(after.size(), equalTo(before.size() + 1));
+    }
+
+    @Test
+    public void testCreationContactNewSetHamcrest() throws InterruptedException {
+        Thread.sleep(1000);
+        Set<ContactData> before = app.contact().all();
+        System.out.println(before);
+        ContactData contact = new ContactData().withFirstName("Dmitrii").withLastName("Ivanov");
+        app.contact().create(contact, true);
+        app.goToHomePage();
+        Set<ContactData> after = app.contact().all();
+        System.out.println(after);
+
+        assertThat(after.size(), equalTo(before.size() + 1));
+
+        int maxId = after
+                .stream()
+                .mapToInt(ContactData::getId)
+                .max()
+                .orElse(0);
+        Set<ContactData> expected = new HashSet<>(before);
+        expected.add(contact.withId(maxId));
+
+        assertThat(after, equalTo(expected));
     }
 }

@@ -34,14 +34,8 @@ public class ContactData {
         return this;
     }
 
-    public ContactData withAllPhones(String allPhones) {
-        this.allPhones = allPhones;
-        return this;
-    }
-
-    private String allPhones;
-
     public String getAllPhones() {
+
         return allPhones;
     }
 
@@ -223,11 +217,6 @@ public class ContactData {
     public int getId() {
 
         return id;
-    }
-
-    public String getAllPhones() {
-
-        return allPhones;
     }
 
     public String getAllEmails() {

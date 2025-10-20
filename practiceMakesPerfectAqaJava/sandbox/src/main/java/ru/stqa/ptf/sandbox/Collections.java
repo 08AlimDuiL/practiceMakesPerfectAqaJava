@@ -1,6 +1,9 @@
 package ru.stqa.ptf.sandbox;
 
 import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 
 public class Collections {
 
@@ -29,7 +32,17 @@ public class Collections {
         // Set<Integer> intSet = Set.of(1, 2, 3, 4, 5);
         Set<Integer> intSet = new HashSet<>();
 
-        Map<String, Integer> map= new HashMap<>();
+        Map<String, Integer> map = new HashMap<>();
+
+       /* List<Integer> ints = new ArrayList<Integer>(List.of(1, 4, -2, 5, 0, 6));
+        ints.sort(new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return o1 - o2;
+            }
+        });
+        System.out.println(ints);
+*/
 
     }
 }
