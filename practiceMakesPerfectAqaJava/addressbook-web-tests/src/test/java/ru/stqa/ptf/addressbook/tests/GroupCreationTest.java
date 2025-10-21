@@ -7,15 +7,45 @@ import org.testng.annotations.*;
 import ru.stqa.ptf.addressbook.model.GroupData;
 import ru.stqa.ptf.addressbook.model.Groups;
 
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
 public class GroupCreationTest extends TestBase {
+
+    @DataProvider
+    public Iterator<Object[]> validGroups() {
+        List<Object[]> list = new ArrayList<Object[]>();
+//        list.add(new Object[]{"test1' ", "header 1", "footer 1"});
+//        list.add(new Object[]{"test2", "header 2", "footer 2"});
+//        list.add(new Object[]{"test3", "header 3", "footer 3"});
+        list.add(new Object[]{new GroupData().withName("test1").withHeader("header1").withFooter("footer 1")});
+        list.add(new Object[]{new GroupData().withName("test2").withHeader("header2").withFooter("footer3")});
+        list.add(new Object[]{new GroupData().withName("test3").withHeader("header2").withFooter("footer3")});
+
+        return list.iterator();
+    }
+
+    @Test(dataProvider = "validGroups")
+    public void testGroupCreationParam(GroupData group) { ////String name, String header, String footer
+        //String[] names = new String[]{"test1", "test2", "test3"};
+        //  for (String name : names) {
+        ////  GroupData group = new GroupData().withName(name).withHeader(header).withFooter(footer);
+        app.goTo().groupPageHeader();
+        Groups before = app.group().all();
+        app.group().create(group);
+        assertThat(app.group().count(), equalTo(before.size() + 1));
+        Groups after = app.group().all();
+        assertThat(after, equalTo(
+                before.withAdded(
+                        group
+                                .withId(after
+                                        .stream().mapToInt(g -> g.getId()).max().getAsInt()))
+        ));
+        //}
+    }
+
 
     @Test
     public void testGroupCreationFirst() {
