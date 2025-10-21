@@ -80,6 +80,7 @@ public class GroupData {
 
     @Override
     public int hashCode() {
+
         return Objects.hash(id, name);
     }
 
@@ -92,6 +93,7 @@ public class GroupData {
     }
 
     public int hashCodeByName() {
+
         return Objects.hashCode(name);
     }
 }
