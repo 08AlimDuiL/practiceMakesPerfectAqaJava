@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 import ru.stqa.ptf.addressbook.model.ContactData;
 import ru.stqa.ptf.addressbook.model.Contacts;
 
+import java.io.File;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
@@ -98,7 +99,7 @@ public class ContactCreationTest extends TestBase {
 
         int maxId = after
                 .stream()
-                .mapToInt(ContactData::getId)
+                .mapToInt(ContactData::getId)  // .mapToInt(contact -> contact.getId()) Лямбда - это короткий синтаксис для записи анонимных функций.
                 .max()
                 .orElse(0);
         Set<ContactData> expected = new HashSet<>(before);
@@ -106,4 +107,39 @@ public class ContactCreationTest extends TestBase {
 
         assertThat(after, equalTo(expected));
     }
+
+    @Test(description = "Folder 6.1")
+    public void testContactCreation() {
+        app.goTo().goToHomeHeader();
+        app.contact().initContactCreation();
+
+        File photo = new File("src/test/resources/stru.png");
+        System.out.println(photo.getAbsolutePath());
+        app.contact().fillFormContactWithFoto(
+                new ContactData()
+                        .withFirstName("Petya")
+                        .withLastName("Petrov")
+                        .withPhoto(photo),
+                true
+        );
+        app.contact().enterContact();
+        app.goTo().goToHomeHeader();
+
+    }
+
+    @Test(description = "Folder 6.1 Helper test")
+    public void testCurrentDir() {
+        File currentDir = new File(".");
+        System.out.println(currentDir.getAbsolutePath());
+        File photo = new File("src/test/resources/stru.png");
+        System.out.println(photo.getAbsolutePath());
+        System.out.println(photo.exists());
+    }
 }
+/*
+.mapToInt(new ToIntFunction<ContactData>() {
+    @Override
+    public int applyAsInt(ContactData contact) {
+        return contact.getId();
+})
+ */

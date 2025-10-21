@@ -93,10 +93,33 @@ public class ContactHelper extends HelperBase {
     }
 
     public void fillFormContact(ContactData contactData, boolean creation) {
-        type(By.name("firstname"), contactData.getName());
+        type(By.name("firstname"), contactData.getFirstName());
         type(By.name("middlename"), contactData.getMiddleName());
         type(By.name("lastname"), contactData.getLastName());
         type(By.name("nickname"), contactData.getNickName());
+        type(By.name("company"), contactData.getCompany());
+        type(By.name("address"), contactData.getAddress());
+        type(By.name("home"), contactData.getHomePhoneNumber());
+        type(By.name("mobile"), contactData.getMobilePhoneNumber());
+        type(By.name("work"), contactData.getWorkPhoneNumber());
+        type(By.name("fax"), contactData.getFax());
+        type(By.name("email"), contactData.getEmail());
+        clickDropdownAndType(By.name("bday"), contactData.getBirthDay());
+        clickDropdownAndType(By.name("bmonth"), contactData.getBirthMonth());
+        type(By.name("byear"), contactData.getBirthYear());
+        if (creation) {
+            clickDropdownAndType(By.name("new_group"), contactData.getGroup());
+        } else {
+            Assert.assertFalse(isElementPresent(By.name("new_group")));
+        }
+    }
+
+    public void fillFormContactWithFoto(ContactData contactData, boolean creation) {
+        type(By.name("firstname"), contactData.getFirstName());
+        type(By.name("middlename"), contactData.getMiddleName());
+        type(By.name("lastname"), contactData.getLastName());
+        type(By.name("nickname"), contactData.getNickName());
+        attach(By.name("photo"), contactData.getPhoto());
         type(By.name("company"), contactData.getCompany());
         type(By.name("address"), contactData.getAddress());
         type(By.name("home"), contactData.getHomePhoneNumber());
