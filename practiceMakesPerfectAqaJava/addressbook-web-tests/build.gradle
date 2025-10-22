@@ -54,6 +54,13 @@ task testContacts(type: Test) {
     useTestNG() {
         suites('src/test/resources/testngContacts.xml')
     }
+
+    if (project.hasProperty('browser')) {
+        systemProperty 'browser', "${browser}"
+    }
+    if (project.hasProperty('target')) {
+        systemProperty 'target', "${target}"
+    }
     afterTest { desc, result ->
         println "┌─ Тест: ${desc.className}.${desc.name}"
         println "├─ Статус: ${result.resultType}"
