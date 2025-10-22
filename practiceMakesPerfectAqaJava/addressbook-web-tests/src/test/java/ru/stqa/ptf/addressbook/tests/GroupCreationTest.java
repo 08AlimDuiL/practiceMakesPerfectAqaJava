@@ -7,6 +7,7 @@ import org.testng.annotations.*;
 import ru.stqa.ptf.addressbook.model.GroupData;
 import ru.stqa.ptf.addressbook.model.Groups;
 
+import java.io.*;
 import java.util.*;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -14,7 +15,26 @@ import static org.hamcrest.Matchers.equalTo;
 
 public class GroupCreationTest extends TestBase {
 
-    @DataProvider
+    @DataProvider //  description = "Folder 6.5"
+    public Iterator<Object[]> validGroups65() throws IOException {
+        List<Object[]> list = new ArrayList<Object[]>();
+        BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/groups.csv")));
+        String line = reader.readLine();
+        while (line != null) {
+            String[] split = line.split(";");
+            list.add(new Object[]{
+                            new GroupData()
+                                    .withName(split[0])
+                                    .withHeader(split[1])
+                                    .withFooter(split[2])
+                    }
+            );
+            line = reader.readLine();
+        }
+        return list.iterator();
+    }
+
+    @DataProvider //  description = "Folder 6.4"
     public Iterator<Object[]> validGroups() {
         List<Object[]> list = new ArrayList<Object[]>();
 //        list.add(new Object[]{"test1' ", "header 1", "footer 1"});
@@ -27,7 +47,22 @@ public class GroupCreationTest extends TestBase {
         return list.iterator();
     }
 
-    @Test(dataProvider = "validGroups")
+    @Test(dataProvider = "validGroups65", description = "Folder 6.5")
+    public void testGroupCreationParam65(GroupData group) {
+        app.goTo().groupPageHeader();
+        Groups before = app.group().all();
+        app.group().create(group);
+        assertThat(app.group().count(), equalTo(before.size() + 1));
+        Groups after = app.group().all();
+        assertThat(after, equalTo(
+                before.withAdded(
+                        group
+                                .withId(after
+                                        .stream().mapToInt(g -> g.getId()).max().getAsInt()))
+        ));
+    }
+
+    @Test(dataProvider = "validGroups", description = "Folder 6.4")
     public void testGroupCreationParam(GroupData group) { ////String name, String header, String footer
         //String[] names = new String[]{"test1", "test2", "test3"};
         //  for (String name : names) {
@@ -45,7 +80,6 @@ public class GroupCreationTest extends TestBase {
         ));
         //}
     }
-
 
     @Test
     public void testGroupCreationFirst() {
