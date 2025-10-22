@@ -20,25 +20,38 @@ import static org.hamcrest.Matchers.equalTo;
 
 public class GroupCreationTest extends TestBase {
 
-    @DataProvider //  description = "Folder 6.7"
+    @DataProvider //  description = "Folder 6.7&8"
     public Iterator<Object[]> validGroupsFromJson() throws IOException {
-        BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/groups.json")));
-        String json = "";
-        String line = reader.readLine();
-        while (line != null) {
-            json += line;
-            line = reader.readLine();
+        try(BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/groups.json")))){
+            String json = "";
+            String line = reader.readLine();
+            while (line != null) {
+                json += line;
+                line = reader.readLine();
+            }
+            Gson gson = new Gson();
+            List<GroupData> groups = gson.fromJson(json, new TypeToken<List<GroupData>>() {
+            }.getType()); // List<GroupData>.class
+
+            return groups.stream().map((g) -> new Object[]{g})
+                    .collect(Collectors.toList())
+                    .iterator();
         }
-        Gson gson = new Gson();
-        List<GroupData> groups = gson.fromJson(json, new TypeToken<List<GroupData>>() {
-        }.getType()); // List<GroupData>.class
-
-
-        return groups.stream().map((g) -> new Object[]{g})
-                .collect(Collectors.toList())
-                .iterator();
+//        BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/groups.json")));
+//        String json = "";
+//        String line = reader.readLine();
+//        while (line != null) {
+//            json += line;
+//            line = reader.readLine();
+//        }
+//        Gson gson = new Gson();
+//        List<GroupData> groups = gson.fromJson(json, new TypeToken<List<GroupData>>() {
+//        }.getType()); // List<GroupData>.class
+//
+//        return groups.stream().map((g) -> new Object[]{g})
+//                .collect(Collectors.toList())
+//                .iterator();
     }
-
 
     @DataProvider //  description = "Folder 6.6"
     public Iterator<Object[]> validGroups66() throws IOException {
