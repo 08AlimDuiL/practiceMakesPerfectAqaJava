@@ -1,5 +1,6 @@
 package ru.stqa.ptf.addressbook.tests;
 
+import com.thoughtworks.xstream.XStream;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.testng.Assert;
@@ -9,11 +10,32 @@ import ru.stqa.ptf.addressbook.model.Groups;
 
 import java.io.*;
 import java.util.*;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
 public class GroupCreationTest extends TestBase {
+
+    @DataProvider //  description = "Folder 6.6"
+    public Iterator<Object[]> validGroups66() throws IOException {
+        BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/groups.xml")));
+        String xml = "";
+        String line = reader.readLine();
+        while (line != null) {
+            xml += line;
+            line = reader.readLine();
+        }
+        XStream xstream = new XStream();
+        xstream.allowTypes(new Class[]{GroupData.class});  // !!!!
+        xstream.processAnnotations(GroupData.class);
+        List<GroupData> groups = (List<GroupData>) xstream.fromXML(xml);
+
+        return groups.stream().map((g) -> new Object[]{g})
+                .collect(Collectors.toList())
+                .iterator();
+    }
 
     @DataProvider //  description = "Folder 6.5"
     public Iterator<Object[]> validGroups65() throws IOException {
@@ -45,6 +67,21 @@ public class GroupCreationTest extends TestBase {
         list.add(new Object[]{new GroupData().withName("test3").withHeader("header2").withFooter("footer3")});
 
         return list.iterator();
+    }
+
+    @Test(dataProvider = "validGroups66", description = "Folder 6.6")
+    public void testGroupCreationParam66(GroupData group) {
+        app.goTo().groupPageHeader();
+        Groups before = app.group().all();
+        app.group().create(group);
+        assertThat(app.group().count(), equalTo(before.size() + 1));
+        Groups after = app.group().all();
+        assertThat(after, equalTo(
+                before.withAdded(
+                        group
+                                .withId(after
+                                        .stream().mapToInt(g -> g.getId()).max().getAsInt()))
+        ));
     }
 
     @Test(dataProvider = "validGroups65", description = "Folder 6.5")
