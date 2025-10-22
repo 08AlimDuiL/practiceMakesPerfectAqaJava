@@ -26,14 +26,39 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.13.2'
 }
 
-test {
-    useTestNG()
+task testGroups(type: Test) {
+    useTestNG() {
+        suites('src/test/resources/testngGroups.xml')
+    }
     afterTest { desc, result ->
         println "┌─ Тест: ${desc.className}.${desc.name}"
         println "├─ Статус: ${result.resultType}"
         println "└─ Длительность: ${result.endTime - result.startTime}ms"
     }
+    afterSuite { suite, result ->
+        if (!suite.parent) {
+            println "\n" + "╔══════════════════════════════════════════════════════╗"
+            println "║             РЕЗУЛЬТАТЫ ТЕСТОВ                        ║"
+            println "╠══════════════════════════════════════════════════════╣"
+            println "║ Всего тестов: ${result.testCount}".padRight(55) + "║"
+            println "║ Успешно: ${result.successfulTestCount}".padRight(55) + "║"
+            println "║ Провалено: ${result.failedTestCount}".padRight(55) + "║"
+            println "║ Пропущено: ${result.skippedTestCount}".padRight(55) + "║"
+            println "║ Время: ${result.endTime - result.startTime}ms".padRight(55) + "║"
+            println "╚══════════════════════════════════════════════════════╝"
+        }
+    }
+}
 
+task testContacts(type: Test) {
+    useTestNG() {
+        suites('src/test/resources/testngContacts.xml')
+    }
+    afterTest { desc, result ->
+        println "┌─ Тест: ${desc.className}.${desc.name}"
+        println "├─ Статус: ${result.resultType}"
+        println "└─ Длительность: ${result.endTime - result.startTime}ms"
+    }
     afterSuite { suite, result ->
         if (!suite.parent) {
             println "\n" + "╔══════════════════════════════════════════════════════╗"
@@ -62,13 +87,4 @@ testlogger {
     showFailed true
     showStandardStreams true
     showPassedStandardStreams true
-}
-
-task generateGroups(type: JavaExec) {
-    classpath = sourceSets.test.runtimeClasspath
-    mainClass = 'ru.stqa.ptf.addressbook.generators.GroupDataGenerator'
-    javaLauncher = javaToolchains.launcherFor {
-        languageVersion = JavaLanguageVersion.of(11)
-    }
-    args = ['5', 'src/test/resources/groups.csv']
 }
