@@ -5,6 +5,8 @@ import com.google.gson.reflect.TypeToken;
 import com.thoughtworks.xstream.XStream;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import org.testng.annotations.*;
 import ru.stqa.ptf.addressbook.model.GroupData;
@@ -12,17 +14,18 @@ import ru.stqa.ptf.addressbook.model.Groups;
 
 import java.io.*;
 import java.util.*;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
-public class GroupCreationTest extends TestBase {
+public class GroupCreationTests extends TestBase {
+
+    Logger logger = LoggerFactory.getLogger(GroupCreationTests.class);
 
     @DataProvider //  description = "Folder 6.7&8"
     public Iterator<Object[]> validGroupsFromJson() throws IOException {
-        try(BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/groups.json")))){
+        try (BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/groups.json")))) {
             String json = "";
             String line = reader.readLine();
             while (line != null) {
@@ -108,6 +111,7 @@ public class GroupCreationTest extends TestBase {
 
     @Test(dataProvider = "validGroupsFromJson", description = "Folder 6.7")
     public void testGroupCreationParam67(GroupData group) {
+        //logger.info("Start test testGroupCreationParam67");
         app.goTo().groupPageHeader();
         Groups before = app.group().all();
         app.group().create(group);
@@ -119,6 +123,7 @@ public class GroupCreationTest extends TestBase {
                                 .withId(after
                                         .stream().mapToInt(g -> g.getId()).max().getAsInt()))
         ));
+        //logger.info("Stop test testGroupCreationParam67");
     }
 
     @Test(dataProvider = "validGroups66", description = "Folder 6.6")
