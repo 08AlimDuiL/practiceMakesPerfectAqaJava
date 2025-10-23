@@ -64,7 +64,6 @@ public class GroupDataGeneratorWithJson {
         try (Writer writer = new FileWriter(file)) {
             writer.write(json);
         }
-        ;
 //        Writer writer = new FileWriter(file);
 //        writer.write(json);
 //        writer.close();
