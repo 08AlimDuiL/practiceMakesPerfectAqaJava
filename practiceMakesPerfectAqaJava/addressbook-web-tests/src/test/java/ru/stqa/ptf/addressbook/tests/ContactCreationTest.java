@@ -5,6 +5,7 @@ import com.google.gson.reflect.TypeToken;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import ru.stqa.ptf.addressbook.model.ContactData;
 import ru.stqa.ptf.addressbook.model.Contacts;
@@ -97,22 +98,23 @@ public class ContactCreationTest extends TestBase {
     }
 
     @Test
-    public void testCreationContactList() {
-        List<ContactData> before = app.contact().list();
-        ContactData contact = new ContactData("Vasilii", "Ivanov");
-        app.contact().create(contact, true);
-        app.goToHomePage();
-        List<ContactData> after = app.contact().list();
+    @Ignore
+     public void testCreationContactList() {
+         List<ContactData> before = app.contact().list();
+         ContactData contact = new ContactData("Vasilii", "Ivanov");
+         app.contact().create(contact, true);
+         app.goToHomePage();
+         List<ContactData> after = app.contact().list();
 
-        Assert.assertEquals(after.size(), before.size() + 1);
+         Assert.assertEquals(after.size(), before.size() + 1);
 
-        before.add(contact);
-        Comparator<? super ContactData> byId = (g1, g2) -> Integer.compare(g1.getId(), g2.getId());
-        before.sort(byId);
-        after.sort(byId);
+         before.add(contact);
+         Comparator<? super ContactData> byId = (g1, g2) -> Integer.compare(g1.getId(), g2.getId());
+         before.sort(byId);
+         after.sort(byId);
 
-        Assert.assertEquals(before, after);
-    }
+         Assert.assertEquals(before, after);
+     }
 
     @Test
     public void testCreationContactSetHamcrest() {

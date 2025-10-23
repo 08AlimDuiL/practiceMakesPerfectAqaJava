@@ -3,6 +3,11 @@
     <test name="Contacts">
         <classes>
             <class name="ru.stqa.ptf.addressbook.tests.ContactCreationTest"/>
+            <class name="ru.stqa.ptf.addressbook.tests.ContactModificationTest"/>
+            <class name="ru.stqa.ptf.addressbook.tests.ContactDeletionTest"/>
+            <class name="ru.stqa.ptf.addressbook.tests.ContactPhoneTest"/>
+            <class name="ru.stqa.ptf.addressbook.tests.ContactAddressTest"/>
+            <class name="ru.stqa.ptf.addressbook.tests.ContactEmailTest"/>
         </classes>
     </test>
 </suite>

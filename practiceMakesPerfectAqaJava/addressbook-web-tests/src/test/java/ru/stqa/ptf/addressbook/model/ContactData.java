@@ -282,7 +282,6 @@ public class ContactData {
             String email,
             String birthDay,
             String birthMonth,
-
             String birthYear,
             String group) {
         this.id = Integer.MAX_VALUE;
@@ -343,9 +342,9 @@ public class ContactData {
 
     @Override
     public String toString() {
-        return "ContactsData{" +
+        return "ContactData{" +
                 "id=" + id +
-                ", name='" + firstName + '\'' +
+                ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 '}';
     }
