@@ -3,9 +3,12 @@ package ru.stqa.ptf.addressbook.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import ru.stqa.ptf.addressbook.model.GroupData;
 import ru.stqa.ptf.addressbook.model.Groups;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -19,8 +22,11 @@ public class GroupHelper extends HelperBase {
     }
 
     public void returnToGroupPage() {
-
-        click(By.linkText("group page"));
+        WebDriverWait wait = new WebDriverWait(wd, Duration.ofSeconds(5));
+        wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//a[text()='group page']")
+        )).click();
+        // click(By.linkText("group page"));
     }
 
     public void submitGroupCreation() {
@@ -73,6 +79,8 @@ public class GroupHelper extends HelperBase {
 
     public void create(GroupData group) {
         initGroupCreation();
+        WebDriverWait wait = new WebDriverWait(wd, Duration.ofSeconds(5));
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.name("group_name")));
         fillGroupForm(group);
         submitGroupCreation();
         groupCache = null;
