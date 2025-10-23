@@ -1,29 +1,57 @@
 package ru.stqa.ptf.addressbook.model;
 
+import com.google.gson.annotations.Expose;
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
 import java.io.File;
 import java.util.Objects;
 
+@XStreamAlias("contact")
 public class ContactData {
+    @XStreamOmitField
     private int id;
-    private String name;
+
+    @Expose
+    private String firstName;
+    @Expose
     private String middleName;
+    @Expose
     private String lastName;
+    @Expose
     private String nickName;
+    @Expose
     private String company;
+    @Expose
     private String address;
+    @Expose
     private String homePhoneNumber;
+    @Expose
     private String mobilePhoneNumber;
+    @Expose
     private String workPhoneNumber;
+    @Expose
     private String fax;
+    @Expose
     private String email;
+    @Expose
     private String email2;
+    @Expose
     private String email3;
+    @Expose
     private String birthDay;
+    @Expose
     private String birthMonth;
+    @Expose
     private String birthYear;
+    @Expose
     private String group;
+
+    @XStreamOmitField
     private String allPhones;
+    @XStreamOmitField
     private String allEmails;
+    @XStreamOmitField
     private File photo;
 
     public ContactData withAllPhones(String allPhones) {
@@ -41,8 +69,8 @@ public class ContactData {
         return this;
     }
 
-    public ContactData withFirstName(String name) {
-        this.name = name;
+    public ContactData withFirstName(String firstName) {
+        this.firstName = firstName;
         return this;
     }
 
@@ -134,7 +162,7 @@ public class ContactData {
 
     public String getFirstName() {
 
-        return name;
+        return firstName;
     }
 
     public String getMiddleName() {
@@ -241,7 +269,7 @@ public class ContactData {
     }
 
     public ContactData(
-            String name,
+            String firstName,
             String middleName,
             String lastName,
             String nickName,
@@ -254,11 +282,10 @@ public class ContactData {
             String email,
             String birthDay,
             String birthMonth,
-
             String birthYear,
             String group) {
         this.id = Integer.MAX_VALUE;
-        this.name = name;
+        this.firstName = firstName;
         this.middleName = middleName;
         this.lastName = lastName;
         this.nickName = nickName;
@@ -275,8 +302,8 @@ public class ContactData {
         this.group = group;
     }
 
-    public ContactData(String name, String lastName) {
-        this.name = name;
+    public ContactData(String firstName, String lastName) {
+        this.firstName = firstName;
         this.lastName = lastName;
         this.id = Integer.MAX_VALUE;
         this.middleName = "";
@@ -296,7 +323,7 @@ public class ContactData {
 
     public ContactData(int id, String firstName, String lastName) {
         this.id = id;
-        this.name = firstName;
+        this.firstName = firstName;
         this.lastName = lastName;
         this.middleName = "";
         this.nickName = "";
@@ -315,9 +342,9 @@ public class ContactData {
 
     @Override
     public String toString() {
-        return "ContactsData{" +
+        return "ContactData{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 '}';
     }
@@ -327,13 +354,13 @@ public class ContactData {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ContactData that = (ContactData) o;
-        return id == that.id && Objects.equals(name, that.name) && Objects.equals(lastName, that.lastName);
+        return id == that.id && Objects.equals(firstName, that.firstName) && Objects.equals(lastName, that.lastName);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, name, lastName);
+        return Objects.hash(id, firstName, lastName);
     }
 //    @Override
 //    public boolean equals(Object o) {

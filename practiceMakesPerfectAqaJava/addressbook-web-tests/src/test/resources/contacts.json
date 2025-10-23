@@ -1,0 +1,40 @@
+[
+  {
+    "firstName": "Владимир",
+    "middleName": "Алексеевич",
+    "lastName": "Смирнов",
+    "nickName": "IronMan1924",
+    "company": "АгроХолдинг",
+    "address": "бульвар Строителей",
+    "homePhoneNumber": "+7(499)222-33-000",
+    "mobilePhoneNumber": "+7(908)890-12-000",
+    "workPhoneNumber": "+7(495)098-76-000",
+    "fax": "+7(499)888-99-000",
+    "email": "0petrov@gmail.com",
+    "email2": "0kuznetsov.work@inbox.ru",
+    "email3": "0kuznetsov.personal@inbox.ru",
+    "birthDay": "3",
+    "birthMonth": "January",
+    "birthYear": "1971",
+    "group": "test 3"
+  },
+  {
+    "firstName": "Михаил",
+    "middleName": "Владимирович",
+    "lastName": "Васильев",
+    "nickName": "IronMan1954",
+    "company": "ТехноИнновации",
+    "address": "пл. Победы",
+    "homePhoneNumber": "+7(495)555-66-001",
+    "mobilePhoneNumber": "+7(903)345-67-001",
+    "workPhoneNumber": "+7(495)555-44-001",
+    "fax": "+7(495)444-55-001",
+    "email": "1morozov@outlook.com",
+    "email2": "1vasilev.work@list.ru",
+    "email3": "1fedorov.personal@rambler.ru",
+    "birthDay": "6",
+    "birthMonth": "October",
+    "birthYear": "1944",
+    "group": "test 7"
+  }
+]

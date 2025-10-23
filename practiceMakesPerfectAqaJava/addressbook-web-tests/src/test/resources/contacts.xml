@@ -1,0 +1,135 @@
+<list>
+  <contact>
+    <firstName>Александр</firstName>
+    <middleName>Петрович</middleName>
+    <lastName>Сидоров</lastName>
+    <nickName>FastRunner1962</nickName>
+    <company>СтройГарант</company>
+    <address>пл. Победы 3</address>
+    <homePhoneNumber>+7(495)345-67-000</homePhoneNumber>
+    <mobilePhoneNumber>+7(909)901-23-000</mobilePhoneNumber>
+    <workPhoneNumber>+7(499)111-00-000</workPhoneNumber>
+    <fax>+7(499)777-88-000</fax>
+    <email>0popov@hotmail.com</email>
+    <email2>0sidorov.work@yandex.ru</email2>
+    <email3>0vasilev.personal@list.ru</email3>
+    <birthDay>8</birthDay>
+    <birthMonth>December</birthMonth>
+    <birthYear>1980</birthYear>
+    <group>test 3</group>
+  </contact>
+  <contact>
+    <firstName>Владимир</firstName>
+    <middleName>Петрович</middleName>
+    <lastName>Иванов</lastName>
+    <nickName>BlueWolf1928</nickName>
+    <company>ТелекомСервис</company>
+    <address>ул. Садовая 7</address>
+    <homePhoneNumber>+7(499)222-33-001</homePhoneNumber>
+    <mobilePhoneNumber>+7(901)123-45-001</mobilePhoneNumber>
+    <workPhoneNumber>+7(495)876-54-001</workPhoneNumber>
+    <fax>+7(495)444-55-001</fax>
+    <email>1vasilev@list.ru</email>
+    <email2>1vasilev.work@list.ru</email2>
+    <email3>1novikov.personal@bk.ru</email3>
+    <birthDay>12</birthDay>
+    <birthMonth>June</birthMonth>
+    <birthYear>1953</birthYear>
+    <group>test 9</group>
+  </contact>
+  <contact>
+    <firstName>Павел</firstName>
+    <middleName>Иванович</middleName>
+    <lastName>Новиков</lastName>
+    <nickName>IronMan1988</nickName>
+    <company>ТелекомСервис</company>
+    <address>ул. Садовая 60</address>
+    <homePhoneNumber>+7(495)555-66-002</homePhoneNumber>
+    <mobilePhoneNumber>+7(904)456-78-002</mobilePhoneNumber>
+    <workPhoneNumber>+7(495)765-43-002</workPhoneNumber>
+    <fax>+7(499)777-88-002</fax>
+    <email>2kuznetsov@inbox.ru</email>
+    <email2>2popov.work@hotmail.com</email2>
+    <email3>2novikov.personal@bk.ru</email3>
+    <birthDay>18</birthDay>
+    <birthMonth>October</birthMonth>
+    <birthYear>1971</birthYear>
+    <group>test 8</group>
+  </contact>
+  <contact>
+    <firstName>Павел</firstName>
+    <middleName>Дмитриевич</middleName>
+    <lastName>Федоров</lastName>
+    <nickName>SilverFox1958</nickName>
+    <company>ЭнергоПром</company>
+    <address>бульвар Строителей 55</address>
+    <homePhoneNumber>+7(495)456-78-003</homePhoneNumber>
+    <mobilePhoneNumber>+7(901)123-45-003</mobilePhoneNumber>
+    <workPhoneNumber>+7(499)111-00-003</workPhoneNumber>
+    <fax>+7(495)444-55-003</fax>
+    <email>3novikov@bk.ru</email>
+    <email2>3morozov.work@outlook.com</email2>
+    <email3>3ivanov.personal@mail.ru</email3>
+    <birthDay>28</birthDay>
+    <birthMonth>June</birthMonth>
+    <birthYear>1934</birthYear>
+    <group>test 9</group>
+  </contact>
+  <contact>
+    <firstName>Павел</firstName>
+    <middleName>Петрович</middleName>
+    <lastName>Новиков</lastName>
+    <nickName>IronMan1935</nickName>
+    <company>ИТ Решения</company>
+    <address>пр. Мира 21</address>
+    <homePhoneNumber>+7(499)444-55-004</homePhoneNumber>
+    <mobilePhoneNumber>+7(904)456-78-004</mobilePhoneNumber>
+    <workPhoneNumber>+7(499)444-33-004</workPhoneNumber>
+    <fax>+7(495)999-00-004</fax>
+    <email>4petrov@gmail.com</email>
+    <email2>4morozov.work@outlook.com</email2>
+    <email3>4kuznetsov.personal@inbox.ru</email3>
+    <birthDay>1</birthDay>
+    <birthMonth>February</birthMonth>
+    <birthYear>1993</birthYear>
+    <group>test 1</group>
+  </contact>
+  <contact>
+    <firstName>Владимир</firstName>
+    <middleName>Олегович</middleName>
+    <lastName>Смирнов</lastName>
+    <nickName>RedDragon1961</nickName>
+    <company>ИТ Решения</company>
+    <address>ул. Школьная 99</address>
+    <homePhoneNumber>+7(499)222-33-005</homePhoneNumber>
+    <mobilePhoneNumber>+7(909)901-23-005</mobilePhoneNumber>
+    <workPhoneNumber>+7(499)111-00-005</workPhoneNumber>
+    <fax>+7(495)111-22-005</fax>
+    <email>5novikov@bk.ru</email>
+    <email2>5smirnov.work@company.com</email2>
+    <email3>5ivanov.personal@mail.ru</email3>
+    <birthDay>13</birthDay>
+    <birthMonth>August</birthMonth>
+    <birthYear>1986</birthYear>
+    <group>test 10</group>
+  </contact>
+  <contact>
+    <firstName>Владимир</firstName>
+    <middleName>Олегович</middleName>
+    <lastName>Смирнов</lastName>
+    <nickName>SmartCat1945</nickName>
+    <company>ТелекомСервис</company>
+    <address>пр. Космонавтов 29</address>
+    <homePhoneNumber>+7(495)123-45-006</homePhoneNumber>
+    <mobilePhoneNumber>+7(901)123-45-006</mobilePhoneNumber>
+    <workPhoneNumber>+7(499)111-00-006</workPhoneNumber>
+    <fax>+7(495)111-22-006</fax>
+    <email>6ivanov@mail.ru</email>
+    <email2>6ivanov.work@mail.ru</email2>
+    <email3>6novikov.personal@bk.ru</email3>
+    <birthDay>22</birthDay>
+    <birthMonth>September</birthMonth>
+    <birthYear>1961</birthYear>
+    <group>test 7</group>
+  </contact>
+</list>
