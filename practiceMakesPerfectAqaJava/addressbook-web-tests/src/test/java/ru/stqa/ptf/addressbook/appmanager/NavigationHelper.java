@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 public class NavigationHelper extends HelperBase {
 
     public NavigationHelper(WebDriver wd) {
+
         super(wd);
     }
 
@@ -27,6 +28,7 @@ public class NavigationHelper extends HelperBase {
     }
 
     public void goToAddNewContactHeader() {
+
         wd.findElement(By.linkText("add new")).click();
     }
 }

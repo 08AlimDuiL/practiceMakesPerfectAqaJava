@@ -6,10 +6,12 @@ import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 import java.io.File;
 import java.util.Objects;
+
 @XStreamAlias("contact")
 public class ContactData {
     @XStreamOmitField
     private int id;
+
     @Expose
     private String firstName;
     @Expose
@@ -44,6 +46,7 @@ public class ContactData {
     private String birthYear;
     @Expose
     private String group;
+
     @XStreamOmitField
     private String allPhones;
     @XStreamOmitField

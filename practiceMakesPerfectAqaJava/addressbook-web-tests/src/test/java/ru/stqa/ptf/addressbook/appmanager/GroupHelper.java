@@ -61,6 +61,8 @@ public class GroupHelper extends HelperBase {
     }
 
     public void initGroupModification() {
+
+
         click(By.xpath("//input[@name=\"edit\"][1]"));
     }
 

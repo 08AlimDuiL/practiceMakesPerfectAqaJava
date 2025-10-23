@@ -70,8 +70,11 @@ public class ContactHelper extends HelperBase {
     }
 
     public void enterContact() {
-        // click(By.xpath("//div[@id='content']/form/input[21]"));
         click(By.xpath("//form/input[@value=\"Enter\"][last()]"));
+        WebDriverWait wait = new WebDriverWait(wd, Duration.ofSeconds(5));
+        wait.until(ExpectedConditions.presenceOfElementLocated(
+                By.xpath("//div[@class='msgbox']//a[contains(text(), 'home page')]")
+        ));
         contactsCache = null;
     }
 
