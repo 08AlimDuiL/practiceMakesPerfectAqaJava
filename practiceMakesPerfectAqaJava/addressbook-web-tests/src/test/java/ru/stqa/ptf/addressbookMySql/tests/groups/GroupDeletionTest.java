@@ -1,9 +1,10 @@
-package ru.stqa.ptf.addressbookMySql.tests;
+package ru.stqa.ptf.addressbookMySql.tests.groups;
 
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.ptf.addressbookMySql.model.GroupData;
 import ru.stqa.ptf.addressbookMySql.model.Groups;
+import ru.stqa.ptf.addressbookMySql.tests.TestBase;
 
 import java.util.List;
 import java.util.Set;

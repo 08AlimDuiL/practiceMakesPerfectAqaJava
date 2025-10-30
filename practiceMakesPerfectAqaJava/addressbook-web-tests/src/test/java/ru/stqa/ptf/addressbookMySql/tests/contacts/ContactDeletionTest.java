@@ -1,10 +1,11 @@
-package ru.stqa.ptf.addressbookMySql.tests;
+package ru.stqa.ptf.addressbookMySql.tests.contacts;
 
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.ptf.addressbookMySql.model.ContactData;
 import ru.stqa.ptf.addressbookMySql.model.Contacts;
+import ru.stqa.ptf.addressbookMySql.tests.TestBase;
 
 import java.util.List;
 

@@ -1,8 +1,9 @@
-package ru.stqa.ptf.addressbookMySql.tests;
+package ru.stqa.ptf.addressbookMySql.tests.contacts;
 
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.ptf.addressbookMySql.model.ContactData;
+import ru.stqa.ptf.addressbookMySql.tests.TestBase;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;

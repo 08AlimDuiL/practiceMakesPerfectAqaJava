@@ -1,4 +1,4 @@
-package ru.stqa.ptf.addressbookMySql.tests;
+package ru.stqa.ptf.addressbookMySql.tests.groups;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -13,6 +13,7 @@ import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import ru.stqa.ptf.addressbookMySql.model.GroupData;
 import ru.stqa.ptf.addressbookMySql.model.Groups;
+import ru.stqa.ptf.addressbookMySql.tests.TestBase;
 
 import java.io.BufferedReader;
 import java.io.File;

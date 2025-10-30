@@ -3,56 +3,112 @@ package ru.stqa.ptf.addressbookMySql.model;
 import com.google.gson.annotations.Expose;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
+import org.hibernate.annotations.Type;
 
+import javax.persistence.*;
 import java.io.File;
 import java.util.Objects;
 
+@Entity
+@Table(name = "addressbook")
 @XStreamAlias("contact")
 public class ContactData {
+    @Id
+    @Column(name = "id")
     @XStreamOmitField
     private int id;
 
+    @Column(name = "firstname")
     @Expose
     private String firstName;
+
+    @Column(name = "middlename")
     @Expose
     private String middleName;
+
+    @Column(name = "lastname")
     @Expose
     private String lastName;
+
+    @Column(name = "nickname")
     @Expose
     private String nickName;
+
+    @Column(name = "company")
     @Expose
     private String company;
+
+    @Column(name = "address")
+    @Type(type = "text")
     @Expose
     private String address;
+
+    @Column(name = "home")
+    @Type(type = "text")
     @Expose
     private String homePhoneNumber;
+
+    @Column(name = "mobile")
+    @Type(type = "text")
     @Expose
     private String mobilePhoneNumber;
+
+    @Column(name = "work")
+    @Type(type = "text")
     @Expose
     private String workPhoneNumber;
+
+    @Column(name = "fax")
+    @Type(type = "text")
     @Expose
     private String fax;
+
+    @Column(name = "email")
+    @Type(type = "text")
     @Expose
     private String email;
+
+    @Column(name = "email2")
+    @Type(type = "text")
     @Expose
     private String email2;
+
+    @Column(name = "email3")
+    @Type(type = "text")
     @Expose
     private String email3;
+
+    @Transient
+    //@Column(name = "bday")
     @Expose
     private String birthDay;
+
+    @Transient
+    //@Column(name = "bmonth")
     @Expose
     private String birthMonth;
+
+    @Transient
+   //@Column(name = "byear")
     @Expose
     private String birthYear;
+
+    @Transient
     @Expose
     private String group;
 
+    @Transient
     @XStreamOmitField
     private String allPhones;
+
+    @Transient
     @XStreamOmitField
     private String allEmails;
+
+    @Column(name = "photo")
+    @Type(type = "text")
     @XStreamOmitField
-    private File photo;
+    private String photo;
 
     public ContactData withAllPhones(String allPhones) {
         this.allPhones = allPhones;
@@ -156,7 +212,7 @@ public class ContactData {
 
     public ContactData withPhoto(File photo) {
 
-        this.photo = photo;
+        this.photo = photo.getPath();  //Folder 7.3
         return this;
     }
 
@@ -261,8 +317,12 @@ public class ContactData {
     }
 
     public File getPhoto() {
-
-        return photo;
+        //Folder 7.3
+        if (photo != null) {
+            return new File(photo);
+        } else {
+            return null;
+        }
     }
 
     public ContactData() {
@@ -362,17 +422,4 @@ public class ContactData {
 
         return Objects.hash(id, firstName, lastName);
     }
-//    @Override
-//    public boolean equals(Object o) {
-//        if (this == o) return true;
-//        if (o == null || getClass() != o.getClass()) return false;
-//        ContactData that = (ContactData) o;
-//        return Objects.equals(name, that.name) && Objects.equals(lastName, that.lastName);
-//    }
-//
-//    @Override
-//    public int hashCode() {
-//
-//        return Objects.hash(name, lastName);
-//    }
 }
