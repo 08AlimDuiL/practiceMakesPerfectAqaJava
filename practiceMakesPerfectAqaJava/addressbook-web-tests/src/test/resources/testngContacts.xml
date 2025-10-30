@@ -2,12 +2,12 @@
 <suite name="Suite1" verbose="1">
     <test name="Contacts">
         <classes>
-            <class name="ru.stqa.ptf.addressbook.tests.ContactCreationTest"/>
-            <class name="ru.stqa.ptf.addressbook.tests.ContactModificationTest"/>
-            <class name="ru.stqa.ptf.addressbook.tests.ContactDeletionTest"/>
-            <class name="ru.stqa.ptf.addressbook.tests.ContactPhoneTest"/>
-            <class name="ru.stqa.ptf.addressbook.tests.ContactAddressTest"/>
-            <class name="ru.stqa.ptf.addressbook.tests.ContactEmailTest"/>
+            <class name="ru.stqa.ptf.addressbook.folderOneToSix.tests.ContactCreationTest"/>
+            <class name="ru.stqa.ptf.addressbook.folderOneToSix.tests.ContactModificationTest"/>
+            <class name="ru.stqa.ptf.addressbook.folderOneToSix.tests.ContactDeletionTest"/>
+            <class name="ru.stqa.ptf.addressbook.folderOneToSix.tests.ContactPhoneTest"/>
+            <class name="ru.stqa.ptf.addressbook.folderOneToSix.tests.ContactAddressTest"/>
+            <class name="ru.stqa.ptf.addressbook.folderOneToSix.tests.ContactEmailTest"/>
         </classes>
     </test>
 </suite>

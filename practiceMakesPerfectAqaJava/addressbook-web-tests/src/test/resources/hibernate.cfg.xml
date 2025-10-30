@@ -27,8 +27,8 @@
         <property name="hbm2ddl.auto">validate</property> <!-- ВАЖНО:Не использовать `create`! -->
 
         <!-- Names the annotated entity class -->
-        <mapping class="ru.stqa.ptf.addressbookMySql.model.GroupData"/>
-        <mapping class="ru.stqa.ptf.addressbookMySql.model.ContactData"/><!--  Указываем, какие классы связаны с БД -->
+        <mapping class="ru.stqa.ptf.addressbook.folderSeven.model.GroupData"/>
+        <mapping class="ru.stqa.ptf.addressbook.folderSeven.model.ContactData"/><!--  Указываем, какие классы связаны с БД -->
 
     </session-factory>
 </hibernate-configuration>
