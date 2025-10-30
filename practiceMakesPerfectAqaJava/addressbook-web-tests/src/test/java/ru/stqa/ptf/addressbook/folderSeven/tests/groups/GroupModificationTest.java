@@ -28,7 +28,7 @@ public class GroupModificationTest extends TestBase {
 
     //Folder 7.4
     @Test
-    public void testGroupModificationSetHamcrest() {
+    public void testGroupModification() {
         Groups before = app.db().groups();
         GroupData modifiedGroup = before.iterator().next();
         GroupData group = new GroupData()
@@ -44,5 +44,7 @@ public class GroupModificationTest extends TestBase {
         Groups after = app.db().groups();
 
         assertThat(after, equalTo(before.withOut(modifiedGroup).withAdded(group)));
+
+        verifyGroupListInUi();     //Folder 7.5
     }
 }

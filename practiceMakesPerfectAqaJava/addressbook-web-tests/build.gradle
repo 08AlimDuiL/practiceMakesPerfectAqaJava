@@ -33,11 +33,23 @@ task testGroups(type: Test) {
     useTestNG() {
         suites('src/test/resources/testngGroups.xml')
     }
+
+    if (project.hasProperty('browser')) {
+        systemProperty 'browser', "${browser}"
+    }
+    if (project.hasProperty('target')) {
+        systemProperty 'target', "${target}"
+    }
+    if (project.hasProperty('verifyUi')) {
+        systemProperty 'verifyUi', "${verifyUi}"
+    }
+
     afterTest { desc, result ->
         println "┌─ Тест: ${desc.className}.${desc.name}"
         println "├─ Статус: ${result.resultType}"
         println "└─ Длительность: ${result.endTime - result.startTime}ms"
     }
+
     afterSuite { suite, result ->
         if (!suite.parent) {
             println "\n" + "╔══════════════════════════════════════════════════════╗"
@@ -64,11 +76,16 @@ task testContacts(type: Test) {
     if (project.hasProperty('target')) {
         systemProperty 'target', "${target}"
     }
+    if (project.hasProperty('verifyUi')) {
+        systemProperty 'verifyUi', "${verifyUi}"
+    }
+
     afterTest { desc, result ->
         println "┌─ Тест: ${desc.className}.${desc.name}"
         println "├─ Статус: ${result.resultType}"
         println "└─ Длительность: ${result.endTime - result.startTime}ms"
     }
+
     afterSuite { suite, result ->
         if (!suite.parent) {
             println "\n" + "╔══════════════════════════════════════════════════════╗"
