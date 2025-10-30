@@ -46,20 +46,6 @@ public class GroupCreationTests extends TestBase {
                     .collect(Collectors.toList())
                     .iterator();
         }
-//        BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/groups.json")));
-//        String json = "";
-//        String line = reader.readLine();
-//        while (line != null) {
-//            json += line;
-//            line = reader.readLine();
-//        }
-//        Gson gson = new Gson();
-//        List<GroupData> groups = gson.fromJson(json, new TypeToken<List<GroupData>>() {
-//        }.getType()); // List<GroupData>.class
-//
-//        return groups.stream().map((g) -> new Object[]{g})
-//                .collect(Collectors.toList())
-//                .iterator();
     }
 
     @DataProvider //  description = "Folder 6.6"
@@ -103,9 +89,6 @@ public class GroupCreationTests extends TestBase {
     @DataProvider //  description = "Folder 6.4"
     public Iterator<Object[]> validGroups() {
         List<Object[]> list = new ArrayList<Object[]>();
-//        list.add(new Object[]{"test1' ", "header 1", "footer 1"});
-//        list.add(new Object[]{"test2", "header 2", "footer 2"});
-//        list.add(new Object[]{"test3", "header 3", "footer 3"});
         list.add(new Object[]{new GroupData().withName("test1").withHeader("header1").withFooter("footer 1")});
         list.add(new Object[]{new GroupData().withName("test2").withHeader("header2").withFooter("footer3")});
         list.add(new Object[]{new GroupData().withName("test3").withHeader("header2").withFooter("footer3")});
@@ -164,9 +147,6 @@ public class GroupCreationTests extends TestBase {
 
     @Test(dataProvider = "validGroups", description = "Folder 6.4")
     public void testGroupCreationParam(GroupData group) { ////String name, String header, String footer
-        //String[] names = new String[]{"test1", "test2", "test3"};
-        //  for (String name : names) {
-        ////  GroupData group = new GroupData().withName(name).withHeader(header).withFooter(footer);
         app.goTo().groupPageHeader();
         Groups before = app.group().all();
         app.group().create(group);
@@ -212,21 +192,6 @@ public class GroupCreationTests extends TestBase {
         List<GroupData> after = app.group().list();
 
         Assert.assertEquals(after.size(), before.size() + 1);
-  /*
-        int max = 0;
-        for (GroupData g : after) {
-            if (g.getId() > max) {
-                max = g.getId();
-            }
-        }
-        Comparator<? super GroupData> byId = new Comparator<GroupData>() {
-            @Override
-            public int compare(GroupData o1, GroupData o2) {
-
-                return Integer.compare(o1.getId(), o2.getId());
-            }
-        };
-*/
         Comparator<? super GroupData> byId = (Comparator<GroupData>) (o1, o2) -> Integer.compare(o1.getId(), o2.getId());
         int max1 = after.stream().max(byId).get().getId();
         //int max1 = after.stream().max((o1, o2) -> Integer.compare(o1.getId(), o2.getId())).get().getId();

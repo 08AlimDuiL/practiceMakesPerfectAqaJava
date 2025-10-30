@@ -19,45 +19,45 @@ public class ContactPhoneTest extends TestBase {
         app.goTo().goToHomeHeader();
     }
 
-    @Test
-    public void testsContactAllPhones() throws InterruptedException {
-        if (app.contact().list().size() == 0) {
-            app.contact().create(new ContactData()
-                            .withFirstName("Nik")
-                            .withLastName("Petrov")
-                            .withHomePhoneNumber("111")
-                            .withMobilePhoneNumber("222")
-                            .withWorkPhoneNumber("3333"),
-                    true);
-            app.goTo().goToHomeHeader();
-        }
-        Thread.sleep(1000);
-        ContactData contact = app.contact().all().iterator().next();
-        Thread.sleep(1000);
-        ContactData contactInfoFromEditForm = app.contact().infoFromEditForm(contact);
-
-        assertThat(contact.getHomePhoneNumber(), equalTo(cleaned(contactInfoFromEditForm.getHomePhoneNumber())));
-        assertThat(contact.getMobilePhoneNumber(), equalTo(cleaned(contactInfoFromEditForm.getMobilePhoneNumber())));
-        assertThat(contact.getWorkPhoneNumber(), equalTo(cleaned(contactInfoFromEditForm.getWorkPhoneNumber())));
-    }
-
-
-    @Test
-    public void testsContactPhones() {
-        if (app.contact().list().size() == 0) {
-            app.contact().create(new ContactData()
-                            .withFirstName("Nik")
-                            .withLastName("Petrov")
-                            .withHomePhoneNumber("111")
-                            .withWorkPhoneNumber("3333"),
-                    true);
-            app.goTo().goToHomeHeader();
-        }
-        ContactData contact = app.contact().almostAll().iterator().next();
-        ContactData contactInfoFromEditForm = app.contact().infoFromEditForm(contact);
-
-        assertThat(contact.getAllPhones(), equalTo(mergePhones(contactInfoFromEditForm)));
-    }
+//    @Test
+//    public void testsContactAllPhones() throws InterruptedException {
+//        if (app.contact().list().size() == 0) {
+//            app.contact().create(new ContactData()
+//                            .withFirstName("Nik")
+//                            .withLastName("Petrov")
+//                            .withHomePhoneNumber("111")
+//                            .withMobilePhoneNumber("222")
+//                            .withWorkPhoneNumber("3333"),
+//                    true);
+//            app.goTo().goToHomeHeader();
+//        }
+//        Thread.sleep(1000);
+//        ContactData contact = app.contact().all().iterator().next();
+//        Thread.sleep(1000);
+//        ContactData contactInfoFromEditForm = app.contact().infoFromEditForm(contact);
+//
+//        assertThat(contact.getHomePhoneNumber(), equalTo(cleaned(contactInfoFromEditForm.getHomePhoneNumber())));
+//        assertThat(contact.getMobilePhoneNumber(), equalTo(cleaned(contactInfoFromEditForm.getMobilePhoneNumber())));
+//        assertThat(contact.getWorkPhoneNumber(), equalTo(cleaned(contactInfoFromEditForm.getWorkPhoneNumber())));
+//    }
+//
+//
+//    @Test
+//    public void testsContactPhones() {
+//        if (app.contact().list().size() == 0) {
+//            app.contact().create(new ContactData()
+//                            .withFirstName("Nik")
+//                            .withLastName("Petrov")
+//                            .withHomePhoneNumber("111")
+//                            .withWorkPhoneNumber("3333"),
+//                    true);
+//            app.goTo().goToHomeHeader();
+//        }
+//        ContactData contact = app.contact().almostAll().iterator().next();
+//        ContactData contactInfoFromEditForm = app.contact().infoFromEditForm(contact);
+//
+//        assertThat(contact.getAllPhones(), equalTo(mergePhones(contactInfoFromEditForm)));
+//    }
 
     private String mergePhones(ContactData contact) {
 

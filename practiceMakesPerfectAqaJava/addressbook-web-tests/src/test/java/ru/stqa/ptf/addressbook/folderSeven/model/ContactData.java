@@ -7,7 +7,9 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.io.File;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "addressbook")
@@ -89,13 +91,9 @@ public class ContactData {
     private String birthMonth;
 
     @Transient
-   //@Column(name = "byear")
+    //@Column(name = "byear")
     @Expose
     private String birthYear;
-
-    @Transient
-    @Expose
-    private String group;
 
     @Transient
     @XStreamOmitField
@@ -109,6 +107,11 @@ public class ContactData {
     @Type(type = "text")
     @XStreamOmitField
     private String photo;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "address_in_groups",
+            joinColumns = @JoinColumn(name = "id"), inverseJoinColumns = @JoinColumn(name = "group_id"))
+    private Set<GroupData> groups = new HashSet<GroupData>();
 
     public ContactData withAllPhones(String allPhones) {
         this.allPhones = allPhones;
@@ -205,11 +208,6 @@ public class ContactData {
         return this;
     }
 
-    public ContactData withGroup(String group) {
-        this.group = group;
-        return this;
-    }
-
     public ContactData withPhoto(File photo) {
 
         this.photo = photo.getPath();  //Folder 7.3
@@ -296,11 +294,6 @@ public class ContactData {
         return birthYear;
     }
 
-    public String getGroup() {
-
-        return group;
-    }
-
     public int getId() {
 
         return id;
@@ -325,79 +318,12 @@ public class ContactData {
         }
     }
 
+    public Groups getGroups() {
+
+        return new Groups(groups);
+    }
+
     public ContactData() {
-    }
-
-    public ContactData(
-            String firstName,
-            String middleName,
-            String lastName,
-            String nickName,
-            String company,
-            String address,
-            String homePhoneNumber,
-            String mobilePhoneNumber,
-            String workPhoneNumber,
-            String fax,
-            String email,
-            String birthDay,
-            String birthMonth,
-            String birthYear,
-            String group) {
-        this.id = Integer.MAX_VALUE;
-        this.firstName = firstName;
-        this.middleName = middleName;
-        this.lastName = lastName;
-        this.nickName = nickName;
-        this.company = company;
-        this.address = address;
-        this.homePhoneNumber = homePhoneNumber;
-        this.mobilePhoneNumber = mobilePhoneNumber;
-        this.workPhoneNumber = workPhoneNumber;
-        this.fax = fax;
-        this.email = email;
-        this.birthDay = birthDay;
-        this.birthMonth = birthMonth;
-        this.birthYear = birthYear;
-        this.group = group;
-    }
-
-    public ContactData(String firstName, String lastName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.id = Integer.MAX_VALUE;
-        this.middleName = "";
-        this.nickName = "";
-        this.company = "";
-        this.address = "";
-        this.homePhoneNumber = "";
-        this.mobilePhoneNumber = "";
-        this.workPhoneNumber = "";
-        this.fax = "";
-        this.email = "";
-        this.birthDay = "";
-        this.birthMonth = "";
-        this.birthYear = "";
-        this.group = "";
-    }
-
-    public ContactData(int id, String firstName, String lastName) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.middleName = "";
-        this.nickName = "";
-        this.company = "";
-        this.address = "";
-        this.homePhoneNumber = "";
-        this.mobilePhoneNumber = "";
-        this.workPhoneNumber = "";
-        this.fax = "";
-        this.email = "";
-        this.birthDay = "";
-        this.birthMonth = "";
-        this.birthYear = "";
-        this.group = "";
     }
 
     @Override
@@ -421,5 +347,10 @@ public class ContactData {
     public int hashCode() {
 
         return Objects.hash(id, firstName, lastName);
+    }
+
+    public ContactData inGroup(GroupData group) {
+        groups.add(group);
+        return this;
     }
 }

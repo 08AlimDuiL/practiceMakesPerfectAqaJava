@@ -111,7 +111,12 @@ public class ContactHelper extends HelperBase {
         clickDropdownAndType(By.name("bmonth"), contactData.getBirthMonth());
         type(By.name("byear"), contactData.getBirthYear());
         if (creation) {
-            clickDropdownAndType(By.name("new_group"), contactData.getGroup());
+            if (contactData.getGroups().size() > 0) {
+
+                Assert.assertTrue(contactData.getGroups().size() == 1);
+
+                clickDropdownAndType(By.name("new_group"), contactData.getGroups().iterator().next().getName());
+            }
         } else {
             Assert.assertFalse(isElementPresent(By.name("new_group")));
         }
@@ -134,7 +139,12 @@ public class ContactHelper extends HelperBase {
         clickDropdownAndType(By.name("bmonth"), contactData.getBirthMonth());
         type(By.name("byear"), contactData.getBirthYear());
         if (creation) {
-            clickDropdownAndType(By.name("new_group"), contactData.getGroup());
+            if (contactData.getGroups().size() > 0) {
+
+                Assert.assertTrue(contactData.getGroups().size() == 1);
+
+                clickDropdownAndType(By.name("new_group"), contactData.getGroups().iterator().next().getName());
+            }
         } else {
             Assert.assertFalse(isElementPresent(By.name("new_group")));
         }
@@ -157,20 +167,20 @@ public class ContactHelper extends HelperBase {
         return wd.findElements(By.xpath("//td[@class=\"center\"]/input[@name=\"selected[]\"]")).size();
     }
 
-    public List<ContactData> list() {
-        List<ContactData> contacts = new ArrayList<ContactData>();
-        List<WebElement> elements = wd.findElements(By.cssSelector("tr[name='entry']"));
-        for (WebElement element : elements) {
-            List<WebElement> cells = element.findElements(By.tagName("td"));
-            String lastName = cells.get(1).getText();
-            String firstName = cells.get(2).getText();
-            int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-            ContactData contact = new ContactData(id, firstName, lastName);
-            contacts.add(contact);
-        }
-
-        return contacts;
-    }
+//    public List<ContactData> list() {
+//        List<ContactData> contacts = new ArrayList<ContactData>();
+//        List<WebElement> elements = wd.findElements(By.cssSelector("tr[name='entry']"));
+//        for (WebElement element : elements) {
+//            List<WebElement> cells = element.findElements(By.tagName("td"));
+//            String lastName = cells.get(1).getText();
+//            String firstName = cells.get(2).getText();
+//            int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
+//            ContactData contact = new ContactData(id, firstName, lastName);
+//            contacts.add(contact);
+//        }
+//
+//        return contacts;
+//    }
 
     private Contacts contactsCache = null;
 
@@ -282,9 +292,5 @@ public class ContactHelper extends HelperBase {
         WebElement row = checkbox.findElement(By.xpath("./../.."));
         List<WebElement> cells = row.findElements(By.tagName("td"));
         cells.get(7).findElement(By.tagName("a")).click();
-
-        // wd.findElement(By.xpath(String.format("//input[@value='%s']/../../td[8]/a", id))).click();
-        // wd.findElement(By.xpath(String.format("//tr[./input[@value='%s']]/td[8]/a", id))).click();
-        // wd.findElement(By.cssSelector(String.format("a[href='edit.php?id=%s']", id))).click();
     }
 }
