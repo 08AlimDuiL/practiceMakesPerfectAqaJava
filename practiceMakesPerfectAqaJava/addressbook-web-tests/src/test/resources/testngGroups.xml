@@ -2,9 +2,9 @@
 <suite name="Suite1" verbose="1">
     <test name="Groups">
         <classes>
-            <class name="ru.stqa.ptf.addressbook.tests.GroupCreationTests"/>
-            <class name="ru.stqa.ptf.addressbook.tests.GroupModificationTest"/>
-            <class name="ru.stqa.ptf.addressbook.tests.GroupDeletionTest"/>
+            <class name="ru.stqa.ptf.addressbook.folderOneToSix.tests.GroupCreationTests"/>
+            <class name="ru.stqa.ptf.addressbook.folderOneToSix.tests.GroupModificationTest"/>
+            <class name="ru.stqa.ptf.addressbook.folderOneToSix.tests.GroupDeletionTest"/>
         </classes>
     </test>
 </suite>
