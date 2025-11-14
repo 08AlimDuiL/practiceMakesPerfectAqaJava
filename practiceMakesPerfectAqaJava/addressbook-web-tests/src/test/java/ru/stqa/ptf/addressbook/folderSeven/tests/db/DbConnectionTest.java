@@ -11,10 +11,10 @@ public class DbConnectionTest {
 
     @Test
     public void testDbConnection() {
-        Connection conn = null;
+        Connection conn = null; // фундаментальный строительный блок для любого взаимодействия Java с базами данных, т. е. устанавливает физическое соединение с БД
         try {
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/addressbook?user=root&password=");
-            Statement st = conn.createStatement();
+            Statement st = conn.createStatement(); // интерфейс в JDBC, который представляет собой "контейнер" для SQL-запроса
             ResultSet rs = st.executeQuery("select group_id, group_name, group_header, group_footer from group_list"); //"курсор" для навигации по результатам запроса
             Groups groups = new Groups();
             while (rs.next()) { // В каждый момент времени он указывает на одну текущую строку

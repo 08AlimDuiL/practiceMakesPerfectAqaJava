@@ -84,8 +84,10 @@ public class GroupData {
     @Override
     public String toString() {
         return "GroupData{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
+                "group_id=" + id +
+                ",group_name='" + name + '\'' +
+                ",group_header='" + header + '\'' +
+                ",group_footer='" + footer + '\'' +
                 '}';
     }
 
@@ -99,6 +101,7 @@ public class GroupData {
 
     @Override
     public int hashCode() {
+
         return Objects.hash(id, name, header, footer);
     }
 }
