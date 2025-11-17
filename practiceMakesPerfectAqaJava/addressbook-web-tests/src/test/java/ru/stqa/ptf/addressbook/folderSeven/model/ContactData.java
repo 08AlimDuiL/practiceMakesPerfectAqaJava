@@ -108,9 +108,11 @@ public class ContactData {
     @XStreamOmitField
     private String photo;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "address_in_groups",
-            joinColumns = @JoinColumn(name = "id"), inverseJoinColumns = @JoinColumn(name = "group_id"))
+    @ManyToMany(fetch = FetchType.EAGER)// для извлечения всей информации за один заход
+    @JoinTable(name = "address_in_groups", // связующая таблица
+            joinColumns = @JoinColumn(name = "id"),// столбец, который указывает на объект текущего класса
+            inverseJoinColumns = @JoinColumn(name = "group_id"))
+// обратный столбец, который указывает на объект другого типа, т. е. на группу
     private Set<GroupData> groups = new HashSet<GroupData>();
 
     public ContactData withAllPhones(String allPhones) {
@@ -318,7 +320,7 @@ public class ContactData {
         }
     }
 
-    public Groups getGroups() {
+    public Groups getGroups() {// folder 7.6
 
         return new Groups(groups);
     }

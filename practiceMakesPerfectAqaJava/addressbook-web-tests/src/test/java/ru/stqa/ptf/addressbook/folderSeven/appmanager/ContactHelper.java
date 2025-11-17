@@ -4,16 +4,18 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import ru.stqa.ptf.addressbook.folderSeven.model.ContactData;
 import ru.stqa.ptf.addressbook.folderSeven.model.Contacts;
+import ru.stqa.ptf.addressbook.folderSeven.model.GroupData;
 
 import java.time.Duration;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
 
 public class ContactHelper extends HelperBase {
 
@@ -38,7 +40,25 @@ public class ContactHelper extends HelperBase {
     }
 
     public void selectContactById(int id) {
+
         wd.findElement(By.cssSelector("input[value='" + id + "']")).click();
+    }
+
+    public void selectGroupById(int id) {
+        Select dropdown = new Select(wd.findElement(By.name("to_group")));
+        dropdown.selectByValue(String.valueOf(id));
+        WebElement selected = dropdown.getFirstSelectedOption();
+        // System.out.println("DEBUG: Выбрана группа: " + selected.getText() + " (ID: " + selected.getAttribute("value") + ")");
+    }
+
+    public void selectGroupIdWhereContactWillBeDeleted(int id) {
+        Select dropdown = new Select(wd.findElement(By.name("group")));
+        dropdown.selectByValue(String.valueOf(id));
+    }
+
+    public void removeFromGroup() {
+
+        click(By.name("remove"));
     }
 
     public void deleteContact() {
@@ -92,6 +112,16 @@ public class ContactHelper extends HelperBase {
         editContact();
         fillFormContact(contactData, true);
         updateContact();
+        contactsCache = null;
+    }
+
+    public void selectContact(ContactData contactData) {// task 16
+        selectContactById(contactData.getId());
+        contactsCache = null;
+    }
+
+    public void selectGroup(GroupData groupDataData) {// task 16
+        selectGroupById(groupDataData.getId());
         contactsCache = null;
     }
 
@@ -236,7 +266,6 @@ public class ContactHelper extends HelperBase {
         return contacts;
     }
 
-
     public Set<ContactData> almostAll() {
         Set<ContactData> contacts = new HashSet<ContactData>();
         List<WebElement> rows = wd.findElements(By.name("entry"));
@@ -292,5 +321,21 @@ public class ContactHelper extends HelperBase {
         WebElement row = checkbox.findElement(By.xpath("./../.."));
         List<WebElement> cells = row.findElements(By.tagName("td"));
         cells.get(7).findElement(By.tagName("a")).click();
+    }
+
+    public void addGroup() {
+        click(By.name("add"));
+        WebDriverWait wait = new WebDriverWait(wd, Duration.ofSeconds(20));
+        wait.until(ExpectedConditions.textToBePresentInElementLocated(
+                By.xpath("//div[@class='msgbox']"), "Users added."
+
+        ));
+        contactsCache = null;
+    }
+
+    public void goToGroupPageWithNameGroup() {
+        wd.findElement(By.cssSelector("div.msgbox a[href*='group=']")).click();
+
+        contactsCache = null;
     }
 }

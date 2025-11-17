@@ -34,6 +34,7 @@ public class GroupData {
     private String footer;
 
     @ManyToMany(mappedBy = "groups")
+// описывать не нужно, означает , что в парном классе  нужно найти атрибут groups и оттуда взять описание того , как организована связь между объектами
     private Set<ContactData> contacts = new HashSet<ContactData>();
 
     public GroupData withId(int id) {
@@ -76,9 +77,9 @@ public class GroupData {
         return id;
     }
 
-    public Set<ContactData> getContacts() {
+    public Set<ContactData> getContacts() { // folder 7.6
 
-        return contacts;
+        return new Contacts(contacts);
     }
 
     @Override
