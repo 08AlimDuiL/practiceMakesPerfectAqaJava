@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import ru.stqa.ptf.addressbook.folderSeven.model.GroupData;
 import ru.stqa.ptf.addressbook.folderSeven.model.Groups;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
 
 public class GroupHelper extends HelperBase {
 
@@ -26,7 +28,6 @@ public class GroupHelper extends HelperBase {
         wait.until(ExpectedConditions.elementToBeClickable(
                 By.xpath("//a[text()='group page']")
         )).click();
-        // click(By.linkText("group page"));
     }
 
     public void submitGroupCreation() {
@@ -48,7 +49,6 @@ public class GroupHelper extends HelperBase {
 
     public void selectGroup() {
         wd.findElement(By.name("selected[]")).click();
-        //click(By.name("selected[]"));
     }
 
     public void selectGroupByIndex(int index) {
@@ -67,7 +67,6 @@ public class GroupHelper extends HelperBase {
     }
 
     public void initGroupModification() {
-
 
         click(By.xpath("//input[@name=\"edit\"][1]"));
     }
@@ -118,6 +117,7 @@ public class GroupHelper extends HelperBase {
     }
 
     public boolean isThereAGroup() {
+
         return isElementPresent(By.name("selected[]"));
     }
 
@@ -154,6 +154,28 @@ public class GroupHelper extends HelperBase {
 
         return groups;
     }
+
+    public Set<GroupData> allInHomePage() {
+
+        Set<GroupData> groups = new HashSet<GroupData>();
+        WebElement selectElement = wd.findElement(By.name("to_group"));
+        Select dropdown = new Select(selectElement);
+        List<WebElement> options = dropdown.getOptions();
+
+        for (WebElement option : options) {
+            String name = option.getText();
+            String value = option.getAttribute("value");
+
+            if (!value.isEmpty()) {
+                int id = Integer.parseInt(value);
+                groups.add(new GroupData().withId(id).withName(name));
+            }
+            // System.out.println("=============================================" + " / " + name + " / " + value);
+        }
+
+        return groups;
+    }
+
 
     private Groups groupCache = null;
 
