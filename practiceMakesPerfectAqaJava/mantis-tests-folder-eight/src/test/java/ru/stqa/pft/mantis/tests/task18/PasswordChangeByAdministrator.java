@@ -38,19 +38,13 @@ public class PasswordChangeByAdministrator extends TestBase {
 
         UserData selectedUser = app.userManagement().getSelectedUser();
 
-        System.out.println("Выбран пользователь: " + selectedUser.getUsername() +
-                " с email: " + selectedUser.getEmail());
-
-
         userEditHelper.clickResetPassword();
-        Thread.sleep(5000);
 
         List<MailMessage> mailMessages = app.mail().waitForMail(1, 30000);
-        System.out.println("Получено писем ========================================================= " + mailMessages.size());
+        // System.out.println("Получено писем ========================================================= " + mailMessages.size());
 
         String confirmationLink = findConfirmationLink(mailMessages, selectedUser.getEmail());
-        System.out.println("Ссылка для смены пароля ================================================" + confirmationLink);
-
+        //  System.out.println("Ссылка для смены пароля ================================================" + confirmationLink);
         app.registration().finish(confirmationLink, newPassword);
 
         HttpSession session = app.newSession();

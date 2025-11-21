@@ -22,24 +22,26 @@ public class UserManagementHelper {
         this.wd = app.getDriver();
     }
 
-    private By userTableRows = By.cssSelector("table tbody tr");
-    private By userManagementLink = By.linkText("Управление пользователями");
-    private By usernameLinks = By.cssSelector("td a[href*='manage_user_edit_page.php']");
+    private static final By USER_TABLE_ROWS = By.cssSelector("table tbody tr");
+    private static final By USER_MANAGEMENT_LINK = By.linkText("Управление пользователями");
+    private static final By USERNAME_LINKS = By.cssSelector("td a[href*='manage_user_edit_page.php']");
+
+    private static final String ADMIN_USERNAME = "administrator";
 
     public UserManagementHelper goToUserManagement() {
-        wd.findElement(userManagementLink).click();
+        wd.findElement(USER_MANAGEMENT_LINK).click();
 
         return this;
     }
 
     public UserEditHelper selectRandomUserWithOutAdmin() {
 
-        List<WebElement> rows = wd.findElements(userTableRows);
+        List<WebElement> rows = wd.findElements(USER_TABLE_ROWS);
 
         List<WebElement> nonAdminRows = rows.stream()
                 .filter(row -> {
-                    WebElement userLink = row.findElement(usernameLinks);
-                    return !userLink.getText().equals("administrator");
+                    WebElement userLink = row.findElement(USERNAME_LINKS);
+                    return !userLink.getText().equals(ADMIN_USERNAME);
                 })
                 .collect(Collectors.toList());
 
@@ -50,7 +52,7 @@ public class UserManagementHelper {
         WebElement randomRow = nonAdminRows.get(random.nextInt(nonAdminRows.size()));
 
         List<WebElement> cells = randomRow.findElements(By.tagName("td"));
-        String username = cells.get(0).findElement(usernameLinks).getText();
+        String username = cells.get(0).findElement(USERNAME_LINKS).getText();
         String email = cells.get(2).getText();
 
 
@@ -58,51 +60,23 @@ public class UserManagementHelper {
                 .withUsername(username)
                 .withEmail(email);
 
-        cells.get(0).findElement(usernameLinks).click();
+        cells.get(0).findElement(USERNAME_LINKS).click();
 
         System.out.println("Выбран пользователь: " + username + " с email: " + email);
 
         return app.userEdit();
     }
 
-    public UserData selectRandomUserWithOutAdminAndGetData() {
-        List<WebElement> rows = wd.findElements(userTableRows);
-
-        List<WebElement> nonAdminRows = rows.stream()
-                .filter(row -> {
-                    WebElement userLink = row.findElement(usernameLinks);
-                    return !userLink.getText().equals("administrator");
-                })
-                .collect(Collectors.toList());
-
-        if (nonAdminRows.isEmpty()) {
-            throw new RuntimeException("Не найдено пользователей кроме администратора");
-        }
-
-        WebElement randomRow = nonAdminRows.get(random.nextInt(nonAdminRows.size()));
-
-        List<WebElement> cells = randomRow.findElements(By.tagName("td"));
-        String username = cells.get(0).findElement(usernameLinks).getText();
-        String email = cells.get(2).getText();
-
-        // Создаем и возвращаем UserData
-        UserData selectedUser = new UserData()
-                .withUsername(username)
-                .withEmail(email);
-
-        // Кликаем по пользователю
-        cells.get(0).findElement(usernameLinks).click();
-
-        System.out.println("Выбран пользователь: " + username + " с email: " + email);
-
-        return selectedUser;
-    }
-
-
     public UserData getSelectedUser() {
         if (selectedUser == null) {
             throw new RuntimeException("Пользователь еще не выбран");
         }
         return selectedUser;
+    }
+
+    public int getUserCount() {
+
+        List<WebElement> rows = wd.findElements(USER_TABLE_ROWS);
+        return rows.size();
     }
 }

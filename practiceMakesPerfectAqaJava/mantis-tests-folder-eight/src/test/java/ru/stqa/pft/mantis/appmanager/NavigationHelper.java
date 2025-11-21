@@ -13,31 +13,30 @@ public class NavigationHelper {
         this.wd = app.getDriver();
     }
 
-    private By userLink = By.className("account-menu-link");
-    private By managementLink = By.className("manage-menu-link");
-    private By logoutLink = By.id("logout-link");
-
-    private By userManagementLink = By.cssSelector("a[href*='manage_user_page.php']");
+    private static final By USER_LINK = By.className("account-menu-link");
+    private static final By MANAGEMENT_LINK = By.className("manage-menu-link");
+    private static final By LOGOUT_LINK = By.id("logout-link");
+    private static final By USER_MANAGEMENT_LINK = By.cssSelector("a[href*='manage_user_page.php']");
 
     public void goToUserAccount() {
 
-        wd.findElement(userLink).click();
+        wd.findElement(USER_LINK).click();
     }
 
     public void logout() {
 
-        wd.findElement(logoutLink).click();
+        wd.findElement(LOGOUT_LINK).click();
     }
 
     public UserManagementHelper goToManagementPage() {
 
-        wd.findElement(managementLink).click();
+        wd.findElement(MANAGEMENT_LINK).click();
 
         return app.userManagement();
     }
 
     public void goToUserManagement() {
 
-        wd.findElement(userManagementLink).click();
+        wd.findElement(USER_MANAGEMENT_LINK).click();
     }
 }

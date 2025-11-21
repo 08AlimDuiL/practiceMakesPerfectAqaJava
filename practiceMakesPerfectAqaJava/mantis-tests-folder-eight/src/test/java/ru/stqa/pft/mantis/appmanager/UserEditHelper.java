@@ -18,24 +18,24 @@ public class UserEditHelper {
         this.wait = new WebDriverWait(wd, java.time.Duration.ofSeconds(10));
     }
 
-    private By resetPasswordButton = By.xpath("//form[@id='manage-user-reset-form']//input[@value='Сбросить пароль']");
-    private By continueButton = By.xpath("//input[@value='Продолжить']");
-    private By successMessage = By.xpath("//div[@id='content']/div");
+    private static final By RESET_PASSWORD_BUTTON = By.xpath("//form[@id='manage-user-reset-form']//input[@value='Сбросить пароль']");
+    private static final By CONTINUE_BUTTON = By.xpath("//input[@value='Продолжить']");
+    private static final By SUCCESS_MESSAGE = By.xpath("//div[@id='content']/div");
 
     public UserEditHelper clickResetPassword() throws InterruptedException {
-        wd.findElement(resetPasswordButton).click();
+        wd.findElement(RESET_PASSWORD_BUTTON).click();
 
         wait.until(ExpectedConditions.urlContains("manage_user_reset.php"));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(successMessage));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(SUCCESS_MESSAGE));
 
         System.out.println("Перешли на страницу: " + wd.getCurrentUrl());
-        System.out.println("Сообщение: " + wd.findElement(successMessage).getText());
+        System.out.println("Сообщение: " + wd.findElement(SUCCESS_MESSAGE).getText());
 
         return this;
     }
 
     public UserEditHelper clickContinue() {
-        wd.findElement(continueButton).click();
+        wd.findElement(CONTINUE_BUTTON).click();
 
         wait.until(ExpectedConditions.urlContains("manage_user_page.php"));
 

@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class LoginHelper {
+
     private WebDriver wd;
     private ApplicationManager app;
 
@@ -13,6 +14,7 @@ public class LoginHelper {
     }
 
     public void loginAsAdmin() {
+
         login(app.getProperty("web.adminLogin"), app.getProperty("web.adminPassword"));
     }
 
