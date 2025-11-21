@@ -1,4 +1,6 @@
 rootProject.name = 'practiceMakesPerfectAqaJavaIdea'
 include 'sandbox'
 include 'addressbook-web-tests'
+include 'mantis'
+include 'mantis-tests-folder-eight'
 
