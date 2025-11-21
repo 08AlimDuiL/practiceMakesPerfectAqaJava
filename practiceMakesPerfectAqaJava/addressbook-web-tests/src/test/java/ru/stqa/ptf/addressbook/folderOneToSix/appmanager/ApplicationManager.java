@@ -17,10 +17,6 @@ public class ApplicationManager {
     public WebDriver wd;
     private String browser;
 
-
-
-
-
     private SessionHelper sessionHelper;
     private NavigationHelper navigationHelper;
     private ContactHelper contactHelper;
