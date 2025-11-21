@@ -1,10 +1,22 @@
-.gradle
+### Gradle ###
+.gradle/
 build/
 !sandbox/gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
 !**/src/test/**/build/
 
+### Gradle Project Folder ###
+gradle-project/.gradle/
+gradle-project/build/
+gradle-project/*/build/
+
+### Maven Project Folder ###
+maven-project/**/target/
+maven-project/**/pom.xml.*
+maven-project/**/release.properties
+
 ### IntelliJ IDEA ###
+.idea/
 .idea/modules.xml
 .idea/jarRepositories.xml
 .idea/compiler.xml
@@ -41,3 +53,16 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+
+### Windows ###
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+### Logs ###
+logs/
+*.log
+
+### Temp files ###
+*.tmp
+*.temp
