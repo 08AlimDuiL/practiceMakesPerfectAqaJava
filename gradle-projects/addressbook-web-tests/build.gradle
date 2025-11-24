@@ -1,0 +1,117 @@
+plugins {
+    id 'java'
+    id 'com.adarshr.test-logger' version '3.2.0'
+}
+
+group = 'neo'
+version = '1.0-SNAPSHOT'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(11)
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.testng:testng:6.14.3'
+    implementation 'org.seleniumhq.selenium:selenium-java:4.15.0'
+    implementation 'io.github.bonigarcia:webdrivermanager:5.6.0'
+    testImplementation 'org.hamcrest:hamcrest:2.2'
+    implementation 'com.beust:jcommander:1.82'
+    implementation 'com.thoughtworks.xstream:xstream:1.4.21'
+    implementation 'com.google.code.gson:gson:2.13.2'
+    implementation 'ch.qos.logback:logback-classic:1.5.20'
+    implementation 'com.mysql:mysql-connector-j:8.3.0'
+    implementation 'org.hibernate:hibernate-core:5.6.15.Final'
+}
+
+task testGroups(type: Test) {
+    useTestNG() {
+        suites('src/test/resources/testngGroups.xml')
+    }
+
+    if (project.hasProperty('browser')) {
+        systemProperty 'browser', "${browser}"
+    }
+    if (project.hasProperty('target')) {
+        systemProperty 'target', "${target}"
+    }
+    if (project.hasProperty('verifyUi')) {
+        systemProperty 'verifyUi', "${verifyUi}"
+    }
+
+    afterTest { desc, result ->
+        println "┌─ Тест: ${desc.className}.${desc.name}"
+        println "├─ Статус: ${result.resultType}"
+        println "└─ Длительность: ${result.endTime - result.startTime}ms"
+    }
+
+    afterSuite { suite, result ->
+        if (!suite.parent) {
+            println "\n" + "╔══════════════════════════════════════════════════════╗"
+            println "║             РЕЗУЛЬТАТЫ ТЕСТОВ                        ║"
+            println "╠══════════════════════════════════════════════════════╣"
+            println "║ Всего тестов: ${result.testCount}".padRight(55) + "║"
+            println "║ Успешно: ${result.successfulTestCount}".padRight(55) + "║"
+            println "║ Провалено: ${result.failedTestCount}".padRight(55) + "║"
+            println "║ Пропущено: ${result.skippedTestCount}".padRight(55) + "║"
+            println "║ Время: ${result.endTime - result.startTime}ms".padRight(55) + "║"
+            println "╚══════════════════════════════════════════════════════╝"
+        }
+    }
+}
+
+task testContacts(type: Test) {
+    useTestNG() {
+        suites('src/test/resources/testngContacts.xml')
+    }
+
+    if (project.hasProperty('browser')) {
+        systemProperty 'browser', "${browser}"
+    }
+    if (project.hasProperty('target')) {
+        systemProperty 'target', "${target}"
+    }
+    if (project.hasProperty('verifyUi')) {
+        systemProperty 'verifyUi', "${verifyUi}"
+    }
+
+    afterTest { desc, result ->
+        println "┌─ Тест: ${desc.className}.${desc.name}"
+        println "├─ Статус: ${result.resultType}"
+        println "└─ Длительность: ${result.endTime - result.startTime}ms"
+    }
+
+    afterSuite { suite, result ->
+        if (!suite.parent) {
+            println "\n" + "╔══════════════════════════════════════════════════════╗"
+            println "║             РЕЗУЛЬТАТЫ ТЕСТОВ                        ║"
+            println "╠══════════════════════════════════════════════════════╣"
+            println "║ Всего тестов: ${result.testCount}".padRight(55) + "║"
+            println "║ Успешно: ${result.successfulTestCount}".padRight(55) + "║"
+            println "║ Провалено: ${result.failedTestCount}".padRight(55) + "║"
+            println "║ Пропущено: ${result.skippedTestCount}".padRight(55) + "║"
+            println "║ Время: ${result.endTime - result.startTime}ms".padRight(55) + "║"
+            println "╚══════════════════════════════════════════════════════╝"
+        }
+    }
+}
+
+testlogger {
+    theme 'plain'
+    showExceptions true
+    showStackTraces true
+    showCauses true
+    slowThreshold 1
+    showSummary true
+    showSimpleNames false
+    showPassed true
+    showSkipped true
+    showFailed true
+    showStandardStreams true
+    showPassedStandardStreams true
+}
