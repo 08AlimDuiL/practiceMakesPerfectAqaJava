@@ -2,7 +2,7 @@
 <suite name="Mantis Tests" verbose="1">
     <test name="All Tests">
         <packages>
-            <package name="ru.stqa.pft.soap.tests.*"/>
+            <package name="ru.stqa.pft.mantis.tests.*"/>
         </packages>
     </test>
 </suite>
