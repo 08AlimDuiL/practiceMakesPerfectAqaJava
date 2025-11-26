@@ -115,3 +115,21 @@ testlogger {
     showStandardStreams true
     showPassedStandardStreams true
 }
+
+//// Корневой build.gradle
+//allprojects {
+//    group = 'neo'
+//    version = '1.0-SNAPSHOT'
+//}
+//
+//subprojects {
+//    repositories {
+//        mavenCentral()
+//    }
+//}
+//
+//java {
+//    toolchain {
+//        languageVersion = JavaLanguageVersion.of(11)
+//    }
+//}
