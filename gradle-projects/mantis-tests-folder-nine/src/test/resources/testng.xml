@@ -4,6 +4,8 @@
         <packages>
             <package name="ru.stqa.pft.mantis.tests.*"/>
             <package name="ru.stqa.pft.soap.*"/>
+            <package name="ru.stqa.pft.rest.*"/>
+            <package name="ru.stqa.pft.github.*"/>
         </packages>
     </test>
 </suite>
