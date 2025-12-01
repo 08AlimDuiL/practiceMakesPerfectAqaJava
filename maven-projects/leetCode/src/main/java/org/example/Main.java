@@ -42,6 +42,4 @@ public class Main {
         System.out.println(Solutions.stringMatching(new String[]{"abc", "abcd", "abcde", "ab"}));
 
     }
-
-
 }
