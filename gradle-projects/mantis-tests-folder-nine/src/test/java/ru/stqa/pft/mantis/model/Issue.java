@@ -13,6 +13,10 @@ public class Issue {
         return this;
     }
 
+    public int getId() {
+        return id;
+    }
+
     public String getSummary() {
 
         return summary;
