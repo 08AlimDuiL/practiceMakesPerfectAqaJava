@@ -19,9 +19,7 @@ public class ApplicationManager {
 
     private String browser;
     private RegestrationHelper regestrationHelper;
-    private FtpHelper ftp;
-    private MailHelper mailHelper;// folder 8.6
-    private JamesHelperOldWithTelnet jamesHelper;
+
 
     private NavigationHelper navigationHelper;
     private LoginHelper loginHelper;
@@ -67,14 +65,6 @@ public class ApplicationManager {
         return regestrationHelper;
     }
 
-    public FtpHelper ftp() {
-        if (ftp == null) {
-            ftp = new FtpHelper(this);// ленивая инициализация
-        }
-
-        return ftp;
-    }
-
     public WebDriver getDriver() {
         if (wd == null) {
             if (browser.equals("firefox")) {
@@ -89,23 +79,6 @@ public class ApplicationManager {
         return wd;
     }
 
-    public MailHelper mail() { // folder 8.6
-
-        if (mailHelper == null) {
-            mailHelper = new MailHelper(this);
-        }
-
-        return mailHelper;
-    }
-
-    public JamesHelperOldWithTelnet james() {
-
-        if (jamesHelper == null) {
-            jamesHelper = new JamesHelperOldWithTelnet(this);
-        }
-
-        return jamesHelper;
-    }
 
     public NavigationHelper navigation() {
         if (navigationHelper == null) {
@@ -134,7 +107,6 @@ public class ApplicationManager {
 
         return new UserEditHelper(this); // создаем новый экземпляр каждый раз
     }
-
 
     public SoapHelper soap() {
 

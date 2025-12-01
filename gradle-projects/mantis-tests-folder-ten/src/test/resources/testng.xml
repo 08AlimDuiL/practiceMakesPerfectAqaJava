@@ -1,0 +1,11 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Mantis Tests" verbose="1">
+    <test name="All Tests">
+        <packages>
+            <package name="ru.stqa.pft.mantis.tests.*"/>
+            <package name="ru.stqa.pft.soap.*"/>
+            <package name="ru.stqa.pft.rest.*"/>
+            <package name="ru.stqa.pft.github.*"/>
+        </packages>
+    </test>
+</suite>
