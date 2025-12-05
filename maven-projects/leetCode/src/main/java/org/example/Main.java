@@ -1,5 +1,7 @@
 package org.example;
 
+import java.util.Arrays;
+
 public class Main {
     public static void main(String[] args) {
 
@@ -15,31 +17,33 @@ public class Main {
 
         //----------------------------------------------------------------------------------------------------------------
 
-//        String occurrence = "";
-//
-//        String haystack = "sadbutsad";
-//        String needle = "sad";
-//        int firstOccurrence = -1;
-//        System.out.println(firstOccurrence);
-//
-//        for (int i = 0; i <= haystack.length() - needle.length(); i++) {
-//
-//            for (int j = 0; j < needle.length(); j++) {
-//                if (needle.charAt(i) == haystack.charAt(j)) {
-//                    occurrence += haystack.charAt(j);
-//                    if (occurrence.equals(needle)) {
-//                        firstOccurrence = 0;
-//                        System.out.println(firstOccurrence);
-//                        break;
-//                    }
-//                }
-//            }
-//        }
+        String occurrence = "";
+
+        String haystack = "sadbutsad";
+        String needle = "sad";
+        int firstOccurrence = -1;
+        System.out.println(firstOccurrence);
+
+        for (int i = 0; i <= haystack.length() - needle.length(); i++) {
+
+            for (int j = 0; j < needle.length(); j++) {
+                if (needle.charAt(i) == haystack.charAt(j)) {
+                    occurrence += haystack.charAt(j);
+                    if (occurrence.equals(needle)) {
+                        firstOccurrence = 0;
+                        System.out.println(firstOccurrence);
+                        break;
+                    }
+                }
+            }
+        }
 
         //----------------------------------------------------------------------------------------------------------------
 
         System.out.println(Solutions.stringMatching(new String[]{"mass", "as", "hero", "superhero"}));
         System.out.println(Solutions.stringMatching(new String[]{"abc", "abcd", "abcde", "ab"}));
-
+        System.out.println(Solutions.missingNumber(new int[]{9, 6, 4, 2, 3, 5, 7, 0, 1}));
+        System.out.println(Solutions.missingNumber(new int[]{3, 0, 1}));
+        System.out.println(Arrays.toString(Solutions.sortArrayByParity(new int[]{3, 1, 2, 4})));
     }
 }

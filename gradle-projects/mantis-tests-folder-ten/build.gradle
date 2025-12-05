@@ -19,94 +19,30 @@ repositories {
 dependencies {
     testImplementation 'org.testng:testng:6.14.3'
     implementation 'org.seleniumhq.selenium:selenium-java:4.15.0'
+    implementation 'io.github.bonigarcia:webdrivermanager:5.6.0'
     testImplementation 'org.hamcrest:hamcrest:2.2'
-    //implementation 'org.apache.httpcomponents.client5:httpclient5:5.2.1'
-    implementation 'org.apache.httpcomponents.client5:httpclient5-fluent:5.2.1'
-    implementation 'commons-net:commons-net:3.9.0'
-    implementation 'hu.blackbelt.bundles.subethasmtp:org.subethamail.subethasmtp:3.1.7_1'
-    implementation 'ru.lanwen.verbalregex:java-verbal-expressions:1.8'
-    implementation 'ch.qos.logback:logback-classic:1.5.20'
-
-    // CXF для SOAP
-    implementation 'org.apache.cxf:cxf-rt-frontend-jaxws:4.0.3'
-    implementation 'org.apache.cxf:cxf-rt-transports-http:4.0.3'
-    implementation 'org.apache.cxf:cxf-rt-features-logging:4.0.3'
-
-    // JAXB для Java 11+ (ВАЖНО!)
-    implementation 'jakarta.xml.bind:jakarta.xml.bind-api:4.0.0'
-    implementation 'com.sun.xml.bind:jaxb-impl:4.0.2'
-    implementation 'jakarta.activation:jakarta.activation-api:2.1.0'
-
-    // Дополнительные зависимости для XML обработки
-    implementation 'org.glassfish.jaxb:jaxb-runtime:4.0.2'
-    implementation 'jakarta.xml.ws:jakarta.xml.ws-api:4.0.0'
-    implementation 'com.sun.xml.messaging.saaj:saaj-impl:3.0.2'
-
-    implementation 'biz.futureware.mantis:mantis-axis-soap-client:1.2.19'
-
+    implementation 'com.beust:jcommander:1.82'
+    implementation 'com.thoughtworks.xstream:xstream:1.4.21'
     implementation 'com.google.code.gson:gson:2.13.2'
-
-    testImplementation group: 'io.rest-assured', name: 'rest-assured', version: '4.3.1'//9.5
-
-    implementation 'com.jcabi:jcabi-github:1.1.2'
-
+    implementation 'ch.qos.logback:logback-classic:1.5.20'
+    implementation 'com.mysql:mysql-connector-j:8.3.0'
+    implementation 'org.hibernate:hibernate-core:5.6.15.Final'
 }
 
+task testGroups(type: Test) {
 
-// Создаем отдельную конфигурацию для инструментов WSDL2Java
-configurations {
-    cxfTool
-}
-
-dependencies {
-    cxfTool 'org.apache.cxf:cxf-tools-wsdlto-frontend-jaxws:4.0.3'
-    cxfTool 'org.apache.cxf:cxf-tools-wsdlto-databinding-jaxb:4.0.3'
-    cxfTool 'org.apache.cxf:cxf-tools-common:4.0.3'
-    cxfTool 'org.apache.cxf:cxf-tools-wsdlto-core:4.0.3'
-    cxfTool 'jakarta.xml.bind:jakarta.xml.bind-api:4.0.0'
-    cxfTool 'com.sun.xml.bind:jaxb-impl:4.0.2'
-}
-
-// Задача для генерации Java классов из WSDL
-task generateFromWsdl(type: JavaExec) {
-    classpath = configurations.cxfTool
-    main = 'org.apache.cxf.tools.wsdlto.WSDLToJava'
-
-    args = [
-            '-d', 'src/main/java',          // выходная директория
-            '-p', 'ru.stqa.pft.soap',                 // package name
-            '-client',                      // генерировать клиент
-            '-verbose',                     // подробный вывод
-            'src/main/resources/calculator.wsdl'  // WSDL файл
-    ]
-
-    // Добавим логирование
-    doFirst {
-        println "▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄"
-        println "🚀 Запуск генерации Java классов из WSDL..."
-        println "📁 WSDL файл: src/main/resources/calculator.wsdl"
-        println "📁 Выходная директория: src/main/java"
-        println "📦 Package: mantis"
-        println "▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄"
-    }
-
-    doLast {
-        println "✅ Генерация завершена! Проверьте папку src/main/java/mantis/"
-    }
-}
-
-// Убираем циклическую зависимость - компиляция НЕ зависит от генерации
-// Вместо этого запускаем генерацию вручную когда нужно
-
-
-test {
     useTestNG() {
-        suites('src/test/resources/testng.xml')
+        suites('src/test/resources/testngGroups.xml')
     }
 
     if (project.hasProperty('browser')) {
         systemProperty 'browser', "${browser}"
     }
+
+    if (project.hasProperty('platform')) { // 10.3
+        systemProperty 'platform', "${platform}"
+    }
+
     if (project.hasProperty('target')) {
         systemProperty 'target', "${target}"
     }
@@ -133,4 +69,61 @@ test {
             println "╚══════════════════════════════════════════════════════╝"
         }
     }
+}
+
+task testContacts(type: Test) {
+
+    useTestNG() {
+        suites('src/test/resources/testngContacts.xml')
+    }
+
+    if (project.hasProperty('browser')) {
+        systemProperty 'browser', "${browser}"
+    }
+
+    if (project.hasProperty('platform')) { // 10.3
+        systemProperty 'platform', "${platform}"
+    }
+
+    if (project.hasProperty('target')) {
+        systemProperty 'target', "${target}"
+    }
+    if (project.hasProperty('verifyUi')) {
+        systemProperty 'verifyUi', "${verifyUi}"
+    }
+
+    afterTest { desc, result ->
+        println "┌─ Тест: ${desc.className}.${desc.name}"
+        println "├─ Статус: ${result.resultType}"
+        println "└─ Длительность: ${result.endTime - result.startTime}ms"
+    }
+
+    afterSuite { suite, result ->
+        if (!suite.parent) {
+            println "\n" + "╔══════════════════════════════════════════════════════╗"
+            println "║             РЕЗУЛЬТАТЫ ТЕСТОВ                        ║"
+            println "╠══════════════════════════════════════════════════════╣"
+            println "║ Всего тестов: ${result.testCount}".padRight(55) + "║"
+            println "║ Успешно: ${result.successfulTestCount}".padRight(55) + "║"
+            println "║ Провалено: ${result.failedTestCount}".padRight(55) + "║"
+            println "║ Пропущено: ${result.skippedTestCount}".padRight(55) + "║"
+            println "║ Время: ${result.endTime - result.startTime}ms".padRight(55) + "║"
+            println "╚══════════════════════════════════════════════════════╝"
+        }
+    }
+}
+
+testlogger {
+    theme 'plain'
+    showExceptions true
+    showStackTraces true
+    showCauses true
+    slowThreshold 1
+    showSummary true
+    showSimpleNames false
+    showPassed true
+    showSkipped true
+    showFailed true
+    showStandardStreams true
+    showPassedStandardStreams true
 }
